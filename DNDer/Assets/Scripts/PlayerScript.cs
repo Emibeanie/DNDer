@@ -7,10 +7,12 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private int maxHP = 100;
     [SerializeField] private int atk = 10;
     [SerializeField] private int def = 10;
-    
+
     private int currentHP;
     private int atkSuccess;
     private int defSuccess;
+
+    EnemyScript enemy;
 
     // Start is called before the first frame update
     void Start()
