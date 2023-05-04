@@ -7,12 +7,13 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private int maxHP = 100;
     [SerializeField] private int atk = 10;
     [SerializeField] private int def = 10;
+    [SerializeField] private int crit = 3;
 
     private int currentHP;
     private int atkSuccess;
     private int defSuccess;
 
-    EnemyScript enemy;
+    private EnemyScript enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -38,10 +39,12 @@ public class PlayerScript : MonoBehaviour
             case 1: //Attack succeeded
                 // Trigger an attack animation, damage enemy
                 // If relevant, increase or reduce lovers's affection
+                enemy.EnemyTakesDamage(atk);
                 break;
             case 2: //CRIT Attack
                 // Trigger a special attack animation, damage enemy
                 // If relevant, increase or reduce lovers's affection
+                enemy.EnemyTakesDamage(atk * crit);
                 break;
             default:
                 break;
