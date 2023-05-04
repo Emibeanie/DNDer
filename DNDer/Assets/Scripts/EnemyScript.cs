@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    public PlayerScript player;
+
     [SerializeField] int dmg;
 
     private int maxHP;
     private int currentHP;
     
-    private PlayerScript player;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,14 @@ public class EnemyScript : MonoBehaviour
 
     private void EnemyDealDamage()
     {
+        //Start attack animation
         player.TakeDamage(dmg); //????
+    }
+
+    private void EnemySpecialAttack()
+    {
+        //Start "special" animation
+        EnemyDealDamage();
     }
 
     public void EnemyTakesDamage(int dmg)

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    public EnemyScript enemy;
+
     [SerializeField] private int maxHP = 100;
     [SerializeField] private int atk = 10;
     [SerializeField] private int def = 10;
@@ -13,7 +15,6 @@ public class PlayerScript : MonoBehaviour
     private int atkSuccess;
     private int defSuccess;
 
-    private EnemyScript enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -82,5 +83,11 @@ public class PlayerScript : MonoBehaviour
         {
             currentHP = 0;
         }
+    }
+
+    public void Heal(int healAmount) //Panacea can heal player
+    {
+        currentHP += healAmount;
+        if (currentHP > maxHP) currentHP = maxHP;
     }
 }
