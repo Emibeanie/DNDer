@@ -8,6 +8,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] PlayerScript player;
     [SerializeField] LoverScript lover;
     [SerializeField] EnemyScript enemy;
+    int a;
 
     // Start is called before the first frame update
     void Start()
