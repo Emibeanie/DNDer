@@ -15,9 +15,6 @@ public class HPBarScript : MonoBehaviour
     {
         lerpSpeed = 3f * Time.deltaTime;
         FillHPBar();
-        //System.Console.ReadKey(true);
-        player.getHit(2);
-        player.Heal(1);
     }
     void FillHPBar()
     {
