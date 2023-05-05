@@ -151,6 +151,8 @@ public class GameManagerScript : MonoBehaviour
     public void PlayActions()
     {
         //if attack was chosen, attack first enemy, if enemy dies destroy enemy and advance enemy2
+        enemies[0].EnemyTakesDamage(player.atk);
+        lover.SpecialMove();
         //companion action
         //enemy1 action (if def was chosen proc def), if relevant change affection
         foreach (var enemy in enemies)

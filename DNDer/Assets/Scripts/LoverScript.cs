@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class LoverScript : MonoBehaviour
 {
     public PlayerScript player;
     public EnemyScript enemy;
+
+    [SerializeField] GameObject[] moves;
 
     public int Affection
     {
@@ -20,8 +23,15 @@ public class LoverScript : MonoBehaviour
 
     public void SpecialMove()
     {
+        int chosenMove = new System.Random().Next(0, moves.Length);
+        DoSpecialMove(moves[chosenMove]);
         // depends on lover chosen
         //DealDamage(0);
+    }
+
+    private void DoSpecialMove(GameObject move)
+    {
+        if (Affection < move) return;
     }
 
     private void DealDamage(int dmg)
