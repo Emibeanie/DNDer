@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
+<<<<<<< HEAD
   gm: {fileID: 0}
   anim: {fileID: 5374397239261151981}
   attacks:
@@ -162,5 +163,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+=======
+>>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)
 =======
 >>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)

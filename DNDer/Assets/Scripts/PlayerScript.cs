@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         int dmg = (int)(maxAtt * success);
         target.getHit(dmg);
         Debug.Log(name + " attacked " + target + " for " + dmg);
@@ -30,6 +31,9 @@ public class PlayerScript : MonoBehaviour
        def_points = (int)(maxDef * success);
        Debug.Log(name + " defended");
        anim.Play("player_attack");
+=======
+        currentHP = maxHP;
+>>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)
 =======
         currentHP = maxHP;
 >>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ public class LoverScript : CharacterScript
 
 }
 =======
+=======
+>>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,4 +64,7 @@ public class LoverScript : MonoBehaviour
         enemy.EnemyTakesDamage(dmg);
     }
 }
+<<<<<<< HEAD
+>>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)
+=======
 >>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)

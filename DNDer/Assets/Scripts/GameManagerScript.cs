@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -222,6 +223,8 @@ public class GameManagerScript : MonoBehaviour
     }
 }
 =======
+=======
+>>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -258,4 +261,7 @@ public class GameManagerScript : MonoBehaviour
         
     }
 }
+<<<<<<< HEAD
+>>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)
+=======
 >>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)

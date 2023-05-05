@@ -12,6 +12,7 @@ public class attackBar : MonoBehaviour
     [SerializeField] RectTransform hitter;
     [SerializeField] Button button;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     [SerializeField] Sprite attackHitter;
     [SerializeField] Sprite defendHitter;
@@ -19,6 +20,8 @@ public class attackBar : MonoBehaviour
     [SerializeField] Color defendColor;
     public bool stopped = false;
 =======
+=======
+>>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)
     bool stopped = false;
 >>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)
 
@@ -26,6 +29,7 @@ public class attackBar : MonoBehaviour
 
     void Start()
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
         hitter.anchoredPosition = new Vector2(hitter.anchoredPosition.x, minY);
 
@@ -45,6 +49,9 @@ public class attackBar : MonoBehaviour
             hitter.GetComponent<Image>().sprite = defendHitter;
             button.GetComponentInChildren<TextMeshProUGUI>().text = "BLOCK";
         }
+=======
+        hitter.anchoredPosition = new Vector2(minX, hitter.anchoredPosition.y);
+>>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)
 =======
         hitter.anchoredPosition = new Vector2(minX, hitter.anchoredPosition.y);
 >>>>>>> parent of cd952df (Merge branch 'Sharron' into emily)
