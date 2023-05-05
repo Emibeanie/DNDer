@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class CharacterScript : MonoBehaviour
 {
+    [SerializeField] GameManagerScript gm;
+    [SerializeField] Animator anim;
+
     public AttackScript[] attacks;
     int currentAttack = -1;
-    CharacterScript target;
+    protected CharacterScript target;
     public bool isDead = false;
     
     [SerializeField] int maxHP = 100;

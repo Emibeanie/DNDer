@@ -41,6 +41,6 @@ public class LoverScript : MonoBehaviour
 
     private void DealDamage(int dmg)
     {
-        enemy.EnemyTakesDamage(dmg);
+        //enemy.EnemyTakesDamage(dmg);
     }
 }

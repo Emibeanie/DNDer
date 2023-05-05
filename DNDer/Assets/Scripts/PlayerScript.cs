@@ -1,90 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : CharacterScript
 {
-    [SerializeField] GameManagerScript gm;
-    [SerializeField] Animator anim;
+    [SerializeField] int maxAtt = 10;
+    [SerializeField] int maxDef = 5;
 
-    private int currentHP;
-    private int atkSuccess;
-    private int defSuccess;
+    int def_points = 0;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void PlayerAttack(float success)
     {
-        currentHP = maxHP;
+        int dmg = (int)(maxAtt * success);
+        target.getHit(dmg);
+    }
+    public void PlayerDefend(float success)
+    {
+       int points = (int)(maxDef * success);
     }
 
-    public void Attack(int hit)
+    public override void getHit(int dmg)
     {
-        atkSuccess = hit;
-        switch (atkSuccess)
-        {
-            case 0: //Attack failed
-                // Trigger a funny failing animation
-                // If relevant, increase or reduce lovers's affection
-                break;
-            case 1: //Attack succeeded
-                // Trigger an attack animation, damage enemy
-                // If relevant, increase or reduce lovers's affection
-                enemy.EnemyTakesDamage(atk);
-                break;
-            case 2: //CRIT Attack
-                // Trigger a special attack animation, damage enemy
-                // If relevant, increase or reduce lovers's affection
-                enemy.EnemyTakesDamage(atk * crit);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void Defend(int hit, int enemyDMG)
-    {
-        defSuccess = hit;
-        switch (defSuccess)
-        {
-            case 0: //Defence failed
-                    // Trigger a funny failing animation
-                    // If relevant, increase or reduce lovers's affection
-                TakeDamage(enemyDMG);
-                break;
-            case 1: //Defence succeeded
-                // Trigger a defence animation, reduce player's HP by currentHP -= (enemyDMG + defValue)
-                // If relevant, increase or reduce lovers's affection
-                TakeDamage(enemyDMG);
-                break;
-            case 2: //Defence succeeded completely
-                // Trigger a defence animation, don't reduce player's HP
-                // If relevant, increase or reduce lovers's affection
-                break;
-            default:
-                break;
-        }
-    }
-
-    public int TakeDamage(int dmg)
-    {
-        int total = dmg - def;
-        if(total > 0) currentHP -= total; //if def>damage do nothing
-        if (currentHP < 0)
-        {
-            currentHP = 0;
-        }
-        return total;
-    }
-
-    public void Heal(int healAmount) //Panacea can heal player
-    {
-        currentHP += healAmount;
-        if (currentHP > maxHP) currentHP = maxHP;
+        dmg -= def_points;
+        base.getHit(dmg);
     }
 
     public void animationEnd()
     {
-        gm.animation_ended(gameObject);
+        //gm.animation_ended(gameObject);
     }
 }
