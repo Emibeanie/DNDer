@@ -17,17 +17,13 @@ public class PlayerScript : CharacterScript
     }
     public void PlayerDefend(float success)
     {
-       int points = (int)(maxDef * success);
+       def_points = (int)(maxDef * success);
     }
 
     public override void getHit(int dmg)
     {
         dmg -= def_points;
+        def_points = 0;
         base.getHit(dmg);
-    }
-
-    public void animationEnd()
-    {
-        //gm.animation_ended(gameObject);
     }
 }

@@ -1,23 +1,15 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterScript : MonoBehaviour
 {
-    [SerializeField] GameManagerScript gm;
-    [SerializeField] Animator anim;
+    [SerializeField] protected GameManagerScript gm;
+    [SerializeField] protected Animator anim;
 
     public AttackScript[] attacks;
-    int currentAttack = -1;
-    int buffAmount = 0;
+    protected int currentAttack = -1;
     protected CharacterScript target;
-
-    internal void GetBuff(int buffAmount)
-    {
-        this.buffAmount += buffAmount;
-    }
-
     public bool isDead = false;
     
     [SerializeField] int maxHP = 100;
@@ -40,9 +32,8 @@ public class CharacterScript : MonoBehaviour
 
     public virtual void attack()
     {
-        target.getHit(attacks[currentAttack].dmg + buffAmount);
+        target.getHit(attacks[currentAttack].dmg);
         attacks[currentAttack].effect(target);
-        buffAmount = 0;
     }
 
     public virtual void getHit(int dmg)
@@ -51,17 +42,14 @@ public class CharacterScript : MonoBehaviour
         if (currentHP <= 0) Die();
     }
 
-    public void Heal(int healAmount)
-    {
-        if (isDead) return;
-        currentHP += healAmount;
-        if (currentHP > maxHP) currentHP = maxHP;
-    }
-
     public virtual void Die()
     {
         //die
         isDead = true;
         gameObject.SetActive(false);
+    }
+    public void animationEnd()
+    {
+        gm.animation_ended(this);
     }
 }

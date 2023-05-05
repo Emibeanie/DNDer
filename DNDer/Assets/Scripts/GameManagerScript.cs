@@ -167,7 +167,7 @@ public class GameManagerScript : MonoBehaviour
         return choseAttack;
     }
 
-    public void animation_ended(GameObject character)
+    public void animation_ended(CharacterScript character)
     {
 
     }
