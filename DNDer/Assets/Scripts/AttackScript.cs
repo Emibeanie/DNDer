@@ -10,6 +10,7 @@ public class AttackScript : MonoBehaviour
     public virtual void effect(CharacterScript target)
     {
         Debug.Log("effect");
+        target.getHit(dmg);
         return;
     }
 }
