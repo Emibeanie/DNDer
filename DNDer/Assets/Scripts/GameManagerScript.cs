@@ -12,7 +12,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] Transform[] enemyPos;
     [SerializeField] GameObject chooseUI;
     [SerializeField] GameObject strBarUI;
-    [SerializeField]  TextMeshProUGUI commentText;
+    [SerializeField] TextMeshProUGUI commentText;
     [SerializeField] float maxPerfectHit;
     [SerializeField] float maxSuccessfulHit;
 
@@ -29,15 +29,7 @@ public class GameManagerScript : MonoBehaviour
         strBarUI.SetActive(false);
         SetPlayer();
         NextFight();
-        //SetEnemy();
     }
-
-    //private void SetEnemy()
-    //{
-    //    player.enemy = enemy;
-    //    lover.enemy = enemy;
-    //    enemy.player = player;
-    //}
 
     private void SetPlayer()
     {
@@ -95,10 +87,9 @@ public class GameManagerScript : MonoBehaviour
         if(barPos < maxPerfectHit)
         {
             //perfect
-            Debug.Log("perfect");
             if (choseAttack)
             {
-                //player.Attack(2);
+                player.atk = 10;
                 TypeCommentText("Perfect Hit!");
             }
             else
@@ -111,10 +102,9 @@ public class GameManagerScript : MonoBehaviour
         else if(barPos < maxSuccessfulHit)
         {
             //not perfect
-            Debug.Log("hit");
             if (choseAttack)
             {
-                //player.Attack(1);
+                player.atk = 3;
                 TypeCommentText("Successful Hit!");
             }
             else
@@ -127,10 +117,9 @@ public class GameManagerScript : MonoBehaviour
         else
         {
             //failed
-            Debug.Log("failure");
             if (choseAttack)
             {
-                //player.Attack(2);
+                player.atk = 0;
             }
             else
             {
@@ -146,7 +135,7 @@ public class GameManagerScript : MonoBehaviour
     public void PlayActions()
     {
         //if attack was chosen, attack first enemy, if enemy dies destroy enemy and advance enemy2
-        if(choseAttack) enemies[0].EnemyTakesDamage(player.atk);
+        if(choseAttack && !enemies[0].IsEnemyDead()) enemies[0].EnemyTakesDamage(player.atk);
         //companion action
         lover.SpecialMove();
         //enemy1 action (if def was chosen proc def), if relevant change affection
@@ -154,9 +143,11 @@ public class GameManagerScript : MonoBehaviour
         {
             if (enemy.IsEnemyDead()) continue;
             if (enemy.currentAttack == 0) dmg = enemy.EnemyAttack(player);
-            Debug.Log(dmg);
+            else if (enemy.currentAttack == enemy.attacks.Length) dmg = enemy.EnemySpecialAttack(player);
+            if (dmg < 0) dmg = 0;
             TypeCommentText($"Took {dmg} damage!");
         }
+        player.atk = 0;
         player.def = 0;
     }
 
