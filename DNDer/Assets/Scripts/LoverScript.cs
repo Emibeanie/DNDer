@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public class LoverScript : MonoBehaviour
+public class LoverScript : CharacterScript
 {
     public PlayerScript player;
 

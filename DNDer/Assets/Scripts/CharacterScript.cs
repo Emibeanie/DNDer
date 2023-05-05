@@ -74,4 +74,15 @@ public class CharacterScript : MonoBehaviour
     {
         gm.animation_ended(this);
     }
+
+    public void poisonTick()
+    {
+        if (poisonCount > 0)
+        {
+            poisonCount--;
+            currentHP--;
+            if (currentHP <= 0) Die();
+        }
+        else isPoisoned = false;
+    }
 }
