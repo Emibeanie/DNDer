@@ -173,4 +173,14 @@ public class GameManagerScript : MonoBehaviour
     {
 
     }
+
+    public bool isAttacking()
+    {
+        return choseAttack;
+    }
+
+    public void animation_ended(GameObject character)
+    {
+
+    }
 }

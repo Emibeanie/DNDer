@@ -10,6 +10,8 @@ public class PlayerScript : MonoBehaviour
 
     [SerializeField] private int maxHP = 100;
     [SerializeField] private int crit = 3;
+    [SerializeField] GameManagerScript gm;
+    [SerializeField] Animator anim;
 
     private int currentHP;
     private int atkSuccess;
@@ -85,5 +87,10 @@ public class PlayerScript : MonoBehaviour
     {
         currentHP += healAmount;
         if (currentHP > maxHP) currentHP = maxHP;
+    }
+
+    public void animationEnd()
+    {
+        gm.animation_ended(gameObject);
     }
 }
