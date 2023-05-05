@@ -8,6 +8,7 @@ public class LoverScript : MonoBehaviour
     public PlayerScript player;
     public EnemyScript enemy;
 
+    [SerializeField] GameManagerScript gm;
     [SerializeField] GameObject[] moves;
 
     public int Affection
@@ -31,7 +32,11 @@ public class LoverScript : MonoBehaviour
 
     private void DoSpecialMove(GameObject move)
     {
-        if (Affection < move) return;
+        if (Affection < Array.IndexOf(moves, move))
+        {
+            gm.TypeCommentText("Your companion isn't interested in helping you");
+            return;
+        }
     }
 
     private void DealDamage(int dmg)

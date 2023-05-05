@@ -12,7 +12,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] Transform[] enemyPos;
     [SerializeField] GameObject chooseUI;
     [SerializeField] GameObject strBarUI;
-    [SerializeField] TextMeshProUGUI commentText;
+    [SerializeField]  TextMeshProUGUI commentText;
     [SerializeField] float maxPerfectHit;
     [SerializeField] float maxSuccessfulHit;
 
@@ -28,7 +28,7 @@ public class GameManagerScript : MonoBehaviour
         chooseUI.SetActive(false);
         strBarUI.SetActive(false);
         SetPlayer();
-        Next_fight();
+        NextFight();
         //SetEnemy();
     }
 
@@ -44,12 +44,7 @@ public class GameManagerScript : MonoBehaviour
         lover.player = player;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    private void Next_fight()
+    private void NextFight()
     {
         currentFight++;
         if (fights.Length < currentFight + 1)
@@ -64,9 +59,9 @@ public class GameManagerScript : MonoBehaviour
             enemies[i] = Instantiate(fight.enemies[i]);
             enemies[i].transform.position = enemyPos[i].position;
         }
-        Begin_fight();
+        BeginFight();
     }
-    private void Begin_fight()
+    private void BeginFight()
     {
         SetupFight();
     }
@@ -104,13 +99,13 @@ public class GameManagerScript : MonoBehaviour
             if (choseAttack)
             {
                 //player.Attack(2);
-                commentText.text = "Perfect Hit!";
+                TypeCommentText("Perfect Hit!");
             }
             else
             {
                 //player.Defend(2, 0);
                 player.def += 100;
-                commentText.text = "Perfect Defence!";
+                TypeCommentText("Perfect Defence!");
             }
         }
         else if(barPos < maxSuccessfulHit)
@@ -120,13 +115,13 @@ public class GameManagerScript : MonoBehaviour
             if (choseAttack)
             {
                 //player.Attack(1);
-                commentText.text = "Successful Hit!";
+                TypeCommentText("Successful Hit!");
             }
             else
             {
                 player.def += 5;
                 //player.Defend(2, 0);
-                commentText.text = "Successful Defence!";
+                TypeCommentText("Successful Defence!");
             }
         }
         else
@@ -141,7 +136,7 @@ public class GameManagerScript : MonoBehaviour
             {
                 //player.Defend(2, 0);
             }
-            commentText.text = "You are a failure in the eyes of your ancestors";
+            TypeCommentText("You are a failure in the eyes of your ancestors");
         }
         //change affection if relevant
         //text based on success% and affection
@@ -151,22 +146,23 @@ public class GameManagerScript : MonoBehaviour
     public void PlayActions()
     {
         //if attack was chosen, attack first enemy, if enemy dies destroy enemy and advance enemy2
-        enemies[0].EnemyTakesDamage(player.atk);
-        lover.SpecialMove();
+        if(choseAttack) enemies[0].EnemyTakesDamage(player.atk);
         //companion action
+        lover.SpecialMove();
         //enemy1 action (if def was chosen proc def), if relevant change affection
         foreach (var enemy in enemies)
         {
-            Debug.Log(enemy);
             if (enemy.IsEnemyDead()) continue;
-            //Debug.Log(enemy);
             if (enemy.currentAttack == 0) dmg = enemy.EnemyAttack(player);
             Debug.Log(dmg);
-            commentText.text = $"Took {dmg} damage!";
+            TypeCommentText($"Took {dmg} damage!");
         }
-
-        //enemy2 action (if def was chosen proc def)
         player.def = 0;
+    }
+
+    public  void TypeCommentText(string txt)
+    {
+        commentText.text = txt;
     }
 
     private void Win()
