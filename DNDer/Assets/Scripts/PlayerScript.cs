@@ -13,15 +13,14 @@ public class PlayerScript : CharacterScript
     public void PlayerAttack(float success)
     {
         int dmg = (int)(maxAtt * success);
-        target.getHit(dmg);
-        Debug.Log(name + " attacked " + target + " for " + dmg);
-        anim.Play("player_attack");
+        gm.turnActions.Insert(0,
+            new turnAction(turnAction.ActionType.takeDamage, target, "player_attack",
+            dmg + buffAmount));
+        buffAmount = 0;
     }
     public void PlayerDefend(float success)
     {
-       def_points = (int)(maxDef * success);
-       Debug.Log(name + " defended");
-       anim.Play("player_attack");
+        def_points = (int)(maxDef * success);
     }
 
     public override void getHit(int dmg)

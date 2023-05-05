@@ -6,7 +6,7 @@ using UnityEngine;
 public class CharacterScript : MonoBehaviour
 {
     [SerializeField] protected GameManagerScript gm;
-    [SerializeField] protected Animator anim;
+    [SerializeField] public Animator anim;
 
     public AttackScript[] attacks;
     public bool isPoisoned = false;
@@ -20,7 +20,7 @@ public class CharacterScript : MonoBehaviour
     protected int currentAttack = -1;
     protected CharacterScript target;
     public bool isDead = false;
-    int buffAmount = 0;
+    protected int buffAmount = 0;
     
     public int maxHP = 100;
     public int currentHP;
@@ -34,8 +34,7 @@ public class CharacterScript : MonoBehaviour
     public void GetBuff(int buffAmount)
     {
         this.buffAmount = buffAmount;
-        Debug.Log(name + " buffed");
-        anim.Play("player_attack");
+        gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.getBuff, this, "player_attack"));
     }
     public void set_target(CharacterScript target)
     {
@@ -45,24 +44,29 @@ public class CharacterScript : MonoBehaviour
     public virtual void ChooseAttack()
     {
         currentAttack = new System.Random().Next(0, attacks.Length);
-        Debug.Log(name + " chose attack " +  currentAttack);
     }
+    //public virtual void AssignAttack()
+    //{
+    //    gm.turnActions.Enqueue(new turnAction(turnAction.ActionType.attack, this, "player_attack"));
+    //}
+    //public virtual void AssignTakeDamage()
+    //{
 
+    //}
     public virtual void attack()
     {
-        target.getHit(attacks[currentAttack].dmg + buffAmount);
+        gm.turnActions.Insert(0,
+            new turnAction(turnAction.ActionType.takeDamage, target, "player_attack", 
+            attacks[currentAttack].dmg + buffAmount));
         attacks[currentAttack].effect(target);
         buffAmount = 0;
-        Debug.Log(name + " attacked " + target.name + " with " + attacks[currentAttack].name);
-        anim.Play("player_attack");
     }
 
     public virtual void getHit(int dmg)
     {
         currentHP -= dmg;
-        if (currentHP <= 0) Die();
-        Debug.Log(name + " got hit for " + dmg);
-        anim.Play("player_attack");
+        if (currentHP <= 0)
+            gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.die, this, "player_attack"));
     }
 
     public void Heal(int healAmount)
@@ -70,8 +74,6 @@ public class CharacterScript : MonoBehaviour
         if (isDead) return;
         currentHP += healAmount;
         if (currentHP > maxHP) currentHP = maxHP;
-        Debug.Log(name + " healed for " + healAmount);
-        anim.Play("player_attack");
     }
 
     public virtual void Die()
@@ -79,8 +81,6 @@ public class CharacterScript : MonoBehaviour
         //die
         isDead = true;
         gameObject.SetActive(false);
-        Debug.Log(name + " died");
-        anim.Play("player_attack");
     }
     public void animationEnd()
     {
@@ -92,9 +92,8 @@ public class CharacterScript : MonoBehaviour
         {
             poisonCount--;
             currentHP--;
-            if (currentHP <= 0) Die();
-            Debug.Log(name + " took poison damage");
-            anim.Play("player_attack");
+            if (currentHP <= 0)
+                gm.turnActions.Insert(0, new turnAction(turnAction.ActionType.die, this, "player_attack"));
         }
         else isPoisoned = false;
     }
