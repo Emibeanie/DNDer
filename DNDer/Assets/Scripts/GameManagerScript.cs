@@ -136,6 +136,7 @@ public class GameManagerScript : MonoBehaviour
     {
         //if attack was chosen, attack first enemy, if enemy dies destroy enemy and advance enemy2
         if(choseAttack && !enemies[0].IsEnemyDead()) enemies[0].EnemyTakesDamage(player.atk);
+        if (!enemies[0].IsEnemyDead()) AdvanceEnemyArray();
         //companion action
         lover.SpecialMove();
         //enemy1 action (if def was chosen proc def), if relevant change affection
@@ -151,9 +152,21 @@ public class GameManagerScript : MonoBehaviour
         player.def = 0;
     }
 
-    public  void TypeCommentText(string txt)
+    public void TypeCommentText(string txt)
     {
         commentText.text = txt;
+    }
+
+    private void AdvanceEnemyArray()
+    {
+        for (int i = 0; i < enemies.Length - 1; i++)
+        {
+            enemies[i] = enemies[i + 1];
+        }
+        if (enemies.Length > 1)
+        {
+            enemies[enemies.Length - 1] = null;
+        }
     }
 
     private void Win()
