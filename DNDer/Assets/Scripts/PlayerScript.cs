@@ -22,12 +22,6 @@ public class PlayerScript : MonoBehaviour
         currentHP = maxHP;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void Attack()
     {
         //

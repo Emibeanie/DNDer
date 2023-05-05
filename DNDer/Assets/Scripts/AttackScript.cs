@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class AttackScript : MonoBehaviour
 {
-    public bool on_player = true;
+    public bool onPlayer = true;
     public int dmg = 0;
 }

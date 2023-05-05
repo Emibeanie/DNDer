@@ -7,15 +7,15 @@ public class GameManagerScript : MonoBehaviour
 {
     [SerializeField] PlayerScript player;
     [SerializeField] LoverScript lover;
-
     [SerializeField] FightScript[] fights;
-    int current_fight = -1;
-    EnemyScript[] enemies;
-    [SerializeField] Transform[] enemy_pos;
+    [SerializeField] Transform[] enemyPos;
     [SerializeField] GameObject chooseUI;
     [SerializeField] GameObject strBarUI;
 
-    bool chose_attack = true;
+    EnemyScript[] enemies;
+
+    int currentFight = -1;
+    bool choseAttack = true;
 
     // Start is called before the first frame update
     void Start()
@@ -46,27 +46,27 @@ public class GameManagerScript : MonoBehaviour
     }
     private void Next_fight()
     {
-        current_fight++;
-        if (fights.Length < current_fight + 1)
+        currentFight++;
+        if (fights.Length < currentFight + 1)
         {
             Win();
             return;
         }
-        FightScript fight = fights[current_fight];
+        FightScript fight = fights[currentFight];
         enemies = new EnemyScript[fight.enemies.Length];
         for (int i = 0; i < fight.enemies.Length; i++)
         {
             enemies[i] = Instantiate(fight.enemies[i]);
-            enemies[i].transform.position = enemy_pos[i].position;
+            enemies[i].transform.position = enemyPos[i].position;
         }
         Begin_fight();
     }
     private void Begin_fight()
     {
-        setup();
+        SetupFight();
     }
 
-    public void setup()
+    public void SetupFight()
     {
         //choose random attack for each enemy and play setup animation
         foreach (var enemy in enemies)
@@ -74,28 +74,35 @@ public class GameManagerScript : MonoBehaviour
             enemy.currentAttack = new System.Random().Next(0, enemy.attacks.Length);
             //play setup animation
         }
-        choose_menu();
+        ChoiceMenu();
     }
 
-    public void choose_menu()
+    public void ChoiceMenu()
     {
         chooseUI.SetActive(true);
     }
 
-    public void choose_action(bool decision)
+    public void ChooseAction(bool decision)
     {
-        chose_attack = decision;
+        choseAttack = decision;
         chooseUI.SetActive(false);
         strBarUI.SetActive(true);
+        StrBar();
     }
-    public void strBar()
+    public void StrBar()
     {
-
+        //read bar %
+        //change affection if relevant
+        //text based on success% and affection
+        PlayActions();
     }
 
-    public void playActions()
+    public void PlayActions()
     {
-
+        //if attack was chosen, attack first enemy, if enemy dies destroy enemy and advance enemy2
+        //companion action
+        //enemy1 action (if def was chosen proc def), if relevant change affection
+        //enemy2 action (if def was chosen proc def)
     }
 
     private void Win()
