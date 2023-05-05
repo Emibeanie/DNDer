@@ -129,3 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95b3a1d0d389cd643b1bde9f94b414a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  attacks: []
+  currentAttack: 0
+  dmg: 2
