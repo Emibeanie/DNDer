@@ -6,12 +6,14 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     public PlayerScript player;
-
     [SerializeField] int dmg;
 
     private int maxHP;
     private int currentHP;
-    
+
+    public AttackScript[] attacks;
+    public int currentAttack = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +60,6 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

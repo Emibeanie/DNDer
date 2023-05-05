@@ -5,6 +5,7 @@ using UnityEngine;
 public class FightScript : MonoBehaviour
 {
     public EnemyScript[] enemies;
+
     // Start is called before the first frame update
     void Start()
     {
