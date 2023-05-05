@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CharacterScript : MonoBehaviour
 {
-    [SerializeField] GameManagerScript gm;
-    [SerializeField] Animator anim;
+    [SerializeField] protected GameManagerScript gm;
+    [SerializeField] protected Animator anim;
 
     public AttackScript[] attacks;
-    int currentAttack = -1;
+    protected int currentAttack = -1;
     protected CharacterScript target;
     public bool isDead = false;
     
@@ -47,5 +47,9 @@ public class CharacterScript : MonoBehaviour
         //die
         isDead = true;
         gameObject.SetActive(false);
+    }
+    public void animationEnd()
+    {
+        gm.animation_ended(this);
     }
 }
