@@ -63,8 +63,8 @@ public class GameManagerScript : MonoBehaviour
         //choose random attack for each enemy and play setup animation
         foreach (var enemy in enemies)
         {
-            enemy.currentAttack = new System.Random().Next(0, enemy.attacks.Length);
-            //play setup animation
+            enemy.ChooseAttack();
+            enemy.SetupAnimation();
         }
         ChoiceMenu();
     }
@@ -142,8 +142,9 @@ public class GameManagerScript : MonoBehaviour
         foreach (var enemy in enemies)
         {
             if (enemy.IsEnemyDead()) continue;
-            if (enemy.currentAttack == 0) dmg = enemy.EnemyAttack(player);
-            else if (enemy.currentAttack == enemy.attacks.Length) dmg = enemy.EnemySpecialAttack(player);
+
+            dmg = enemy.attacks[enemy.currentAttack].dmg;
+            enemy.attacks[enemy.currentAttack].effect();
             if (dmg < 0) dmg = 0;
             TypeCommentText($"Took {dmg} damage!");
         }

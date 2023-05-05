@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  attacks: []
+  attacks:
+  - {fileID: 6712455499430592583, guid: 11cfbb64d401eea4c88e1effe76996ae, type: 3}
+  - {fileID: 5471268724030818771, guid: 1f40592eb888363479b385bb38ff8b3d, type: 3}
   currentAttack: 0
   dmg: 2

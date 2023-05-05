@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    [SerializeField] public int atk = 10;
-    public EnemyScript enemy;
-    public int def = 0;
-
-    [SerializeField] private int maxHP = 100;
-    [SerializeField] private int crit = 3;
     [SerializeField] GameManagerScript gm;
     [SerializeField] Animator anim;
 
