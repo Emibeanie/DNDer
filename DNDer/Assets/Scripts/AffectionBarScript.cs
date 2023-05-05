@@ -19,6 +19,6 @@ public class AffectionBarScript : MonoBehaviour
     }
     void FillAffBar()
     {
-        affBar.fillAmount = Mathf.Lerp(affBar.fillAmount, lover.affection / lover.maxAffection, lerpSpeed);
+        affBar.fillAmount = Mathf.Lerp(affBar.fillAmount, (float)lover.affection / (float)lover.maxAffection, lerpSpeed);
     }
 }

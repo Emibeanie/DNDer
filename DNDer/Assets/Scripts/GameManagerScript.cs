@@ -32,6 +32,8 @@ public class GameManagerScript : MonoBehaviour
 
     bool effectsMode = false;
 
+    public Queue<turnAction> turnActions = new Queue<turnAction>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -105,35 +107,57 @@ public class GameManagerScript : MonoBehaviour
         else if (barPos < minSuccessfulHit) barPos = 0;
         barScore = barPos;
         actionMode = true;
-        PlayActions();
+        CollectActions();
     }
 
-    public void PlayActions()
+    public void CollectActions()
     {
-        actionIndex++;
-        switch (actionIndex)
+        if (choseAttack)
+            turnActions.Enqueue(new turnAction(turnAction.ActionType.playerAttack, player, "player_attack", 0, barScore));
+        else
+            turnActions.Enqueue(new turnAction(turnAction.ActionType.playerDeffend, player, "player_attack", 0, barScore));
+
+        for(int i = 1; i < allCharacters.Length;i++)
         {
-            case 0:
-                if (choseAttack) player.PlayerAttack(barScore);
-                else player.PlayerDefend(barScore);
-                break;
-            case 1:
-                lover.attack();
-                break;
-            case 2:
-                enemies[0].attack();
-                break;
-            case 3:
-                if (enemies.Length > 1) enemies[1].attack();
-                else PlayActions();
-                break;
-            case 4:
-                actionIndex = -1;
-                actionMode = false;
-                effectsMode = true;
-                EffectsActions();
-                break;
+            turnActions.Enqueue(new turnAction(turnAction.ActionType.attack, allCharacters[i], "player_attack"));
         }
+
+        for(int i = 0; i < allCharacters.Length; i++)
+        {
+            if (allCharacters[i].isPoisoned)
+                turnActions.Enqueue(new turnAction(turnAction.ActionType.takePoisonDamage, allCharacters[i], "player_attack"));
+        }
+
+        actionMode = true;
+        PlayActions();
+
+        
+        
+        
+        //actionIndex++;
+        //switch (actionIndex)
+        //{
+        //    case 0:
+        //        if (choseAttack) player.PlayerAttack(barScore);
+        //        else player.PlayerDefend(barScore);
+        //        break;
+        //    case 1:
+        //        lover.attack();
+        //        break;
+        //    case 2:
+        //        enemies[0].attack();
+        //        break;
+        //    case 3:
+        //        if (enemies.Length > 1) enemies[1].attack();
+        //        else CollectActions();
+        //        break;
+        //    case 4:
+        //        actionIndex = -1;
+        //        actionMode = false;
+        //        effectsMode = true;
+        //        EffectsActions();
+        //        break;
+        //}
     }
 
     public void EffectsActions()
@@ -142,12 +166,25 @@ public class GameManagerScript : MonoBehaviour
         if (actionIndex >= allCharacters.Length)
         {
             effectsMode = false;
+            actionIndex = -1;
             DisposeDead();
         }
         else if (allCharacters[actionIndex].isPoisoned) allCharacters[actionIndex].poisonTick();
         else EffectsActions();
     }
 
+    public void PlayActions()
+    {
+        if (turnActions.Count > 0)
+        {
+            turnActions.Dequeue().CallAction();
+        }
+        else
+        {
+            actionMode = false;
+            DisposeDead();
+        }
+    }
     public void DisposeDead()
     {
         if (enemies[0].isDead)
@@ -188,6 +225,5 @@ public class GameManagerScript : MonoBehaviour
     public void animation_ended(CharacterScript character)
     {
         if (actionMode) PlayActions();
-        else if (effectsMode) EffectsActions();
     }
 }
