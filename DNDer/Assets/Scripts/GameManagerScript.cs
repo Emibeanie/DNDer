@@ -16,7 +16,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] GameObject chooseUI;
     [SerializeField] GameObject strBarUI;
     [SerializeField] TextMeshProUGUI commentText;
-  
+
     [SerializeField] float minPerfectHit;
     [SerializeField] float minSuccessfulHit;
 
