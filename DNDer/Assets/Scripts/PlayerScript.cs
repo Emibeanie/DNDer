@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     public EnemyScript enemy;
+    public int def = 0;
 
     [SerializeField] private int maxHP = 100;
     [SerializeField] private int atk = 10;
-    [SerializeField] private int def = 10;
     [SerializeField] private int crit = 3;
 
     private int currentHP;
@@ -70,7 +70,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int dmg)
+    public int TakeDamage(int dmg)
     {
         int total = dmg - def;
         if(total > 0) currentHP -= total; //if def>damage do nothing
@@ -78,6 +78,7 @@ public class PlayerScript : MonoBehaviour
         {
             currentHP = 0;
         }
+        return total;
     }
 
     public void Heal(int healAmount) //Panacea can heal player

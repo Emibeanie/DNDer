@@ -20,6 +20,7 @@ public class GameManagerScript : MonoBehaviour
 
     int currentFight = -1;
     bool choseAttack = true;
+    int dmg;
 
     // Start is called before the first frame update
     void Start()
@@ -108,6 +109,7 @@ public class GameManagerScript : MonoBehaviour
             else
             {
                 //player.Defend(2, 0);
+                player.def += 100;
                 commentText.text = "Perfect Defence!";
             }
         }
@@ -122,6 +124,7 @@ public class GameManagerScript : MonoBehaviour
             }
             else
             {
+                player.def += 5;
                 //player.Defend(2, 0);
                 commentText.text = "Successful Defence!";
             }
@@ -147,22 +150,21 @@ public class GameManagerScript : MonoBehaviour
 
     public void PlayActions()
     {
-        WaitToRemoveUI();
-        strBarUI.SetActive(false);
         //if attack was chosen, attack first enemy, if enemy dies destroy enemy and advance enemy2
         //companion action
         //enemy1 action (if def was chosen proc def), if relevant change affection
-        //enemy2 action (if def was chosen proc def)
-    }
-
-    private static void WaitToRemoveUI()
-    {
-        float startTime = Time.time; // Store the start time
-
-        while (Time.time < startTime + 3) // Loop until 3 seconds have passed
+        foreach (var enemy in enemies)
         {
-            // Do nothing, just wait
+            Debug.Log(enemy);
+            if (enemy.IsEnemyDead()) continue;
+            //Debug.Log(enemy);
+            if (enemy.currentAttack == 0) dmg = enemy.EnemyAttack(player);
+            Debug.Log(dmg);
+            commentText.text = $"Took {dmg} damage!";
         }
+
+        //enemy2 action (if def was chosen proc def)
+        player.def = 0;
     }
 
     private void Win()

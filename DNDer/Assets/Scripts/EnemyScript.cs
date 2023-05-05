@@ -11,7 +11,7 @@ public class EnemyScript : MonoBehaviour
     
     [SerializeField] int dmg;
 
-    private int maxHP;
+    private int maxHP = 100;
     private int currentHP;
 
     // Start is called before the first frame update
@@ -26,16 +26,21 @@ public class EnemyScript : MonoBehaviour
         //maxHP = 
     }
 
-    private void EnemyDealDamage()
+    private int EnemyDealDamage(int damage, PlayerScript player)
     {
         //Start attack animation
-        player.TakeDamage(dmg); //????
+        return player.TakeDamage(dmg); //????
     }
 
-    private void EnemySpecialAttack()
+    public int EnemyAttack(PlayerScript player)
+    {
+        return EnemyDealDamage(dmg, player);
+    }
+
+    public int EnemySpecialAttack(PlayerScript player)
     {
         //Start "special" animation
-        EnemyDealDamage();
+        return EnemyDealDamage(dmg*2, player);
     }
 
     public void EnemyTakesDamage(int dmg)
