@@ -173,4 +173,9 @@ public class GameManagerScript : MonoBehaviour
     {
 
     }
+
+    public bool isAttacking()
+    {
+        return choseAttack;
+    }
 }

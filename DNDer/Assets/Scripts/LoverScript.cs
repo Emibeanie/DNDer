@@ -31,7 +31,6 @@ public class LoverScript : MonoBehaviour
 
     private void DoSpecialMove(GameObject move)
     {
-        if (Affection < move) return;
     }
 
     private void DealDamage(int dmg)
