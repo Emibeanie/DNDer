@@ -6,6 +6,7 @@ using TMPro;
 using System.Net;
 using UnityEditor.Experimental.GraphView;
 using Unity.VisualScripting;
+using Mono.Collections.Generic;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -30,9 +31,8 @@ public class GameManagerScript : MonoBehaviour
     int actionIndex = -1;
     bool actionMode = false;
 
-    bool effectsMode = false;
 
-    public Queue<turnAction> turnActions = new Queue<turnAction>();
+    public List<turnAction> turnActions = new List<turnAction>();
 
     // Start is called before the first frame update
     void Start()
@@ -113,19 +113,19 @@ public class GameManagerScript : MonoBehaviour
     public void CollectActions()
     {
         if (choseAttack)
-            turnActions.Enqueue(new turnAction(turnAction.ActionType.playerAttack, player, "player_attack", 0, barScore));
+            turnActions.Add(new turnAction(turnAction.ActionType.playerAttack, player, "player_attack", 0, barScore));
         else
-            turnActions.Enqueue(new turnAction(turnAction.ActionType.playerDeffend, player, "player_attack", 0, barScore));
+            turnActions.Add(new turnAction(turnAction.ActionType.playerDeffend, player, "player_attack", 0, barScore));
 
         for(int i = 1; i < allCharacters.Length;i++)
         {
-            turnActions.Enqueue(new turnAction(turnAction.ActionType.attack, allCharacters[i], "player_attack"));
+            turnActions.Add(new turnAction(turnAction.ActionType.attack, allCharacters[i], "player_attack"));
         }
 
         for(int i = 0; i < allCharacters.Length; i++)
         {
             if (allCharacters[i].isPoisoned)
-                turnActions.Enqueue(new turnAction(turnAction.ActionType.takePoisonDamage, allCharacters[i], "player_attack"));
+                turnActions.Add(new turnAction(turnAction.ActionType.takePoisonDamage, allCharacters[i], "player_attack"));
         }
 
         actionMode = true;
@@ -165,7 +165,6 @@ public class GameManagerScript : MonoBehaviour
         actionIndex++;
         if (actionIndex >= allCharacters.Length)
         {
-            effectsMode = false;
             actionIndex = -1;
             DisposeDead();
         }
@@ -177,7 +176,10 @@ public class GameManagerScript : MonoBehaviour
     {
         if (turnActions.Count > 0)
         {
-            turnActions.Dequeue().CallAction();
+            turnAction action = turnActions[0];
+            turnActions.RemoveAt(0);
+            action.CallAction();
+            
         }
         else
         {

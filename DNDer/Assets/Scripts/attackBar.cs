@@ -30,6 +30,7 @@ public class attackBar : MonoBehaviour
     private void OnEnable()
     {
         stopped = false;
+        button.enabled = true;
         if (gm.isAttacking())
         {
             button.GetComponent<Image>().color = attackColor;
@@ -55,6 +56,7 @@ public class attackBar : MonoBehaviour
     public void Stop()
     {
         stopped = true;
+        button.enabled = false;
         gm.StrBar(Mathf.Abs((minY + maxY) / 2 - hitter.anchoredPosition.y));
     }
 

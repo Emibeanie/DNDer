@@ -22,7 +22,8 @@ public class turnAction
     }
     public void CallAction()
     {
-        acting.anim.Play(animation_name);
+        acting.anim.SetTrigger("attack");
+        //acting.anim.Play(animation_name);
         switch (actionType)
         {
             case ActionType.attack:

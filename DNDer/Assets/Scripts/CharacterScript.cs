@@ -34,7 +34,7 @@ public class CharacterScript : MonoBehaviour
     public void GetBuff(int buffAmount)
     {
         this.buffAmount = buffAmount;
-        gm.turnActions.Enqueue(new turnAction(turnAction.ActionType.getBuff, this, "player_attack"));
+        gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.getBuff, this, "player_attack"));
     }
     public void set_target(CharacterScript target)
     {
@@ -55,7 +55,7 @@ public class CharacterScript : MonoBehaviour
     //}
     public virtual void attack()
     {
-        gm.turnActions.Enqueue(
+        gm.turnActions.Insert(0,
             new turnAction(turnAction.ActionType.takeDamage, target, "player_attack", 
             attacks[currentAttack].dmg + buffAmount));
         attacks[currentAttack].effect(target);
@@ -66,7 +66,7 @@ public class CharacterScript : MonoBehaviour
     {
         currentHP -= dmg;
         if (currentHP <= 0)
-            gm.turnActions.Enqueue(new turnAction(turnAction.ActionType.die, this, "player_attack"));
+            gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.die, this, "player_attack"));
     }
 
     public void Heal(int healAmount)
@@ -93,7 +93,7 @@ public class CharacterScript : MonoBehaviour
             poisonCount--;
             currentHP--;
             if (currentHP <= 0)
-                gm.turnActions.Enqueue(new turnAction(turnAction.ActionType.die, this, "player_attack"));
+                gm.turnActions.Insert(0, new turnAction(turnAction.ActionType.die, this, "player_attack"));
         }
         else isPoisoned = false;
     }

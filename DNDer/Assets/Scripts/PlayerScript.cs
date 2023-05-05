@@ -13,7 +13,7 @@ public class PlayerScript : CharacterScript
     public void PlayerAttack(float success)
     {
         int dmg = (int)(maxAtt * success);
-        gm.turnActions.Enqueue(
+        gm.turnActions.Insert(0,
             new turnAction(turnAction.ActionType.takeDamage, target, "player_attack",
             dmg + buffAmount));
         buffAmount = 0;

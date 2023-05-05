@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 456117356970998394}
   - component: {fileID: 4043359294537031867}
-  - component: {fileID: 2080518485}
+  - component: {fileID: 4278284241762613672}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
-  anim: {fileID: 2080518485}
+  anim: {fileID: 0}
   attacks: []
   isPoisoned: 0
   poisonCount: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   currentHP: 0
   maxAtt: 10
   maxDef: 5
---- !u!95 &2080518485
+--- !u!95 &4278284241762613672
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
