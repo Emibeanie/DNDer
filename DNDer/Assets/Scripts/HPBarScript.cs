@@ -18,6 +18,6 @@ public class HPBarScript : MonoBehaviour
     }
     void FillHPBar()
     {
-        HPBar.fillAmount = Mathf.Lerp(HPBar.fillAmount, player.currentHP / player.maxHP, lerpSpeed);
+        HPBar.fillAmount = Mathf.Lerp(HPBar.fillAmount, (float)player.currentHP / (float)player.maxHP, lerpSpeed);
     }
 }
