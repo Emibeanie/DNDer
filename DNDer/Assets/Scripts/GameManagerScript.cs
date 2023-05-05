@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Net;
+using UnityEditor.Experimental.GraphView;
+using Unity.VisualScripting;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -13,14 +16,21 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] GameObject chooseUI;
     [SerializeField] GameObject strBarUI;
     [SerializeField] TextMeshProUGUI commentText;
-    [SerializeField] float maxPerfectHit;
-    [SerializeField] float maxSuccessfulHit;
+  
+    [SerializeField] float minPerfectHit;
+    [SerializeField] float minSuccessfulHit;
 
     EnemyScript[] enemies;
+    CharacterScript[] allCharacters;
 
     int currentFight = -1;
     bool choseAttack = true;
-    int dmg;
+    float barScore = 0;
+
+    int actionIndex = -1;
+    bool actionMode = false;
+
+    bool effectsMode = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,19 +56,26 @@ public class GameManagerScript : MonoBehaviour
         }
         FightScript fight = fights[currentFight];
         enemies = new EnemyScript[fight.enemies.Length];
+        allCharacters = new CharacterScript[fight.enemies.Length + 2];
+        allCharacters[0] = player;
+        allCharacters[1] = lover;
         for (int i = 0; i < fight.enemies.Length; i++)
         {
             enemies[i] = Instantiate(fight.enemies[i]);
             enemies[i].transform.position = enemyPos[i].position;
+            enemies[i].set_target(player);
+            allCharacters[i+2] = enemies[i];
         }
+        player.set_target(enemies[0]);
+        lover.set_target(enemies[0]);
         BeginFight();
     }
     private void BeginFight()
     {
-        SetupFight();
+        Setup();
     }
 
-    public void SetupFight()
+    public void Setup()
     {
         //choose random attack for each enemy and play setup animation
         foreach (var enemy in enemies)
@@ -66,6 +83,7 @@ public class GameManagerScript : MonoBehaviour
             enemy.ChooseAttack();
             enemy.SetupAnimation();
         }
+        lover.ChooseAttack();
         ChoiceMenu();
     }
 
@@ -82,94 +100,83 @@ public class GameManagerScript : MonoBehaviour
     }
     public void StrBar(float barPos)
     {
-        //read bar %
-        //need to change how player.Attack and Defend work
-        if(barPos < maxPerfectHit)
-        {
-            //perfect
-            if (choseAttack)
-            {
-                //player.atk = 10;
-                TypeCommentText("Perfect Hit!");
-            }
-            else
-            {
-                //player.Defend(2, 0);
-                //player.def += 100;
-                TypeCommentText("Perfect Defence!");
-            }
-        }
-        else if(barPos < maxSuccessfulHit)
-        {
-            //not perfect
-            if (choseAttack)
-            {
-                //player.atk = 3;
-                TypeCommentText("Successful Hit!");
-            }
-            else
-            {
-                //player.def += 5;
-                //player.Defend(2, 0);
-                TypeCommentText("Successful Defence!");
-            }
-        }
-        else
-        {
-            //failed
-            if (choseAttack)
-            {
-                //player.atk = 0;
-            }
-            else
-            {
-                //player.Defend(2, 0);
-            }
-            TypeCommentText("You are a failure in the eyes of your ancestors");
-        }
-        //change affection if relevant
-        //text based on success% and affection
+        if (barPos > minPerfectHit) barPos = 1;
+        else if (barPos < minSuccessfulHit) barPos = 0;
+        barScore = barPos;
+        actionMode = true;
         PlayActions();
     }
 
     public void PlayActions()
     {
-        if (player.isPoisoned)
+        actionIndex++;
+        switch (actionIndex)
         {
-            player.getHit(1);
-            player.poisonCount++;
-            if(player.poisonCount >= 5)
-            {
-                player.poisonCount = 0;
-                player.isPoisoned = false;
-            }
+            case 0:
+                if (choseAttack) player.PlayerAttack(barScore);
+                else player.PlayerDefend(barScore);
+                break;
+            case 1:
+                lover.attack();
+                break;
+            case 2:
+                enemies[0].attack();
+                break;
+            case 3:
+                if (enemies.Length > 1) enemies[1].attack();
+                else PlayActions();
+                break;
+            case 4:
+                actionIndex = -1;
+                actionMode = false;
+                effectsMode = true;
+                EffectsActions();
+                break;
         }
-        ////if attack was chosen, attack first enemy, if enemy dies destroy enemy and advance enemy2
-        //if(choseAttack && !enemies[0].IsEnemyDead()) enemies[0].EnemyTakesDamage(player.atk);
-        ////companion action
-        //lover.SpecialMove();
-        ////enemy1 action (if def was chosen proc def), if relevant change affection
-        //foreach (var enemy in enemies)
-        //{
-        //    if (enemy.IsEnemyDead()) continue;
-
-        //    dmg = enemy.attacks[enemy.currentAttack].dmg;
-        //    enemy.attacks[enemy.currentAttack].effect();
-        //    if (dmg < 0) dmg = 0;
-        //    TypeCommentText($"Took {dmg} damage!");
-        //}
-        //player.atk = 0;
-        //player.def = 0;
     }
 
-    public  void TypeCommentText(string txt)
+    public void EffectsActions()
     {
-        commentText.text = txt;
+        actionIndex++;
+        if (actionIndex >= allCharacters.Length)
+        {
+            effectsMode = false;
+            DisposeDead();
+        }
+        else if (allCharacters[actionIndex].isPoisoned) allCharacters[actionIndex].poisonTick();
+        else EffectsActions();
+    }
+
+    public void DisposeDead()
+    {
+        if (enemies[0].isDead)
+        {
+            if (enemies.Length > 1)
+            {
+                if (enemies[1].isDead)
+                {
+                    NextFight();
+                    return;
+                }
+                else
+                {
+                    enemies = new EnemyScript[] { enemies[1] };
+                }
+            }
+            else
+            {
+                if (enemies[1].isDead)
+                {
+                    enemies = new EnemyScript[] { enemies[0] };
+                }
+            }
+        }
+        Setup();
     }
 
     private void Win()
     {
-
+        Debug.Log("WIN!");
     }
 
     public bool isAttacking()
@@ -179,6 +186,7 @@ public class GameManagerScript : MonoBehaviour
 
     public void animation_ended(CharacterScript character)
     {
-
+        if (actionMode) PlayActions();
+        else if (effectsMode) EffectsActions();
     }
 }
