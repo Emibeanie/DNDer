@@ -32,6 +32,6 @@ public class attackBar : MonoBehaviour
     public void Stop()
     {
         stopped = true;
-        gm.StrBar(Mathf.Abs((minX + maxX) / 2 - hitter.rect.x));
+        gm.StrBar(Mathf.Abs((minX + maxX) / 2 - hitter.anchoredPosition.x));
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class GameManagerScript : MonoBehaviour
@@ -148,10 +147,22 @@ public class GameManagerScript : MonoBehaviour
 
     public void PlayActions()
     {
+        WaitToRemoveUI();
+        strBarUI.SetActive(false);
         //if attack was chosen, attack first enemy, if enemy dies destroy enemy and advance enemy2
         //companion action
         //enemy1 action (if def was chosen proc def), if relevant change affection
         //enemy2 action (if def was chosen proc def)
+    }
+
+    private static void WaitToRemoveUI()
+    {
+        float startTime = Time.time; // Store the start time
+
+        while (Time.time < startTime + 3) // Loop until 3 seconds have passed
+        {
+            // Do nothing, just wait
+        }
     }
 
     private void Win()
