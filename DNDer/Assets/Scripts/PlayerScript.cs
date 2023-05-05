@@ -14,10 +14,14 @@ public class PlayerScript : CharacterScript
     {
         int dmg = (int)(maxAtt * success);
         target.getHit(dmg);
+        Debug.Log(name + " attacked " + target + " for " + dmg);
+        anim.Play("player_attack");
     }
     public void PlayerDefend(float success)
     {
        def_points = (int)(maxDef * success);
+       Debug.Log(name + " defended");
+       anim.Play("player_attack");
     }
 
     public override void getHit(int dmg)

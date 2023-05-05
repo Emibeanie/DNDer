@@ -15,11 +15,15 @@ public class LoverScript : CharacterScript
     {
         affection += addAff;
         if (affection > maxAffection) affection = maxAffection;
+        Debug.Log(name + " affection went up");
+        anim.Play("player_attack");
     }
     public void ReduceAffection(int redAff)
     {
         affection -= redAff;
         if (affection < 0) affection = 0;
+        Debug.Log(name + " affection went down");
+        anim.Play("player_attack");
     }
 
 
