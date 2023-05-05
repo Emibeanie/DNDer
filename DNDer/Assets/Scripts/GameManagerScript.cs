@@ -130,34 +130,6 @@ public class GameManagerScript : MonoBehaviour
 
         actionMode = true;
         PlayActions();
-
-        
-        
-        
-        //actionIndex++;
-        //switch (actionIndex)
-        //{
-        //    case 0:
-        //        if (choseAttack) player.PlayerAttack(barScore);
-        //        else player.PlayerDefend(barScore);
-        //        break;
-        //    case 1:
-        //        lover.attack();
-        //        break;
-        //    case 2:
-        //        enemies[0].attack();
-        //        break;
-        //    case 3:
-        //        if (enemies.Length > 1) enemies[1].attack();
-        //        else CollectActions();
-        //        break;
-        //    case 4:
-        //        actionIndex = -1;
-        //        actionMode = false;
-        //        effectsMode = true;
-        //        EffectsActions();
-        //        break;
-        //}
     }
 
     public void EffectsActions()
