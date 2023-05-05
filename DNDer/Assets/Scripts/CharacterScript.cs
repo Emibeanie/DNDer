@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,14 @@ public class CharacterScript : MonoBehaviour
     [SerializeField] protected Animator anim;
 
     public AttackScript[] attacks;
+    public bool isPoisoned = false;
+    public int poisonCount = 0;
+
+    internal void Poisoned()
+    {
+        isPoisoned = true;
+    }
+
     protected int currentAttack = -1;
     protected CharacterScript target;
     public bool isDead = false;
