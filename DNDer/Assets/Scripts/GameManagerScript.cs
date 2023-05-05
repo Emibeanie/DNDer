@@ -134,6 +134,16 @@ public class GameManagerScript : MonoBehaviour
 
     public void PlayActions()
     {
+        if (player.isPoisoned)
+        {
+            player.getHit(1);
+            player.poisonCount++;
+            if(player.poisonCount >= 5)
+            {
+                player.poisonCount = 0;
+                player.isPoisoned = false;
+            }
+        }
         ////if attack was chosen, attack first enemy, if enemy dies destroy enemy and advance enemy2
         //if(choseAttack && !enemies[0].IsEnemyDead()) enemies[0].EnemyTakesDamage(player.atk);
         ////companion action
