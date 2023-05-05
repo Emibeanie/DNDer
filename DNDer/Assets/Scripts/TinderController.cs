@@ -8,6 +8,10 @@ public class TinderController : MonoBehaviour
 {
     //array of tinder profile sprites
     public SpriteRenderer[] sprites;
+    // left swipe sound
+    public AudioSource LswipeSound;
+    // right swipe sound
+    public AudioSource RswipeSound;
 
     public float swipeThreshold = 50f;
     public float swipeSpeed = 10f;
@@ -45,6 +49,7 @@ public class TinderController : MonoBehaviour
                 if (swipeRight)
                 {
                     Debug.Log("Swiped right");
+                    RswipeSound.PlayOneShot(RswipeSound.clip);
                     SceneManager.LoadScene("Main Menu");
                 }
                 else if (swipeLeft)
@@ -75,6 +80,7 @@ public class TinderController : MonoBehaviour
                                 sprites[i].sortingOrder++;
                             }
                         }
+                        LswipeSound.PlayOneShot(LswipeSound.clip);
                     }
                 }
             }
