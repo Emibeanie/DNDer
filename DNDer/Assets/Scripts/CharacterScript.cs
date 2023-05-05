@@ -22,7 +22,7 @@ public class CharacterScript : MonoBehaviour
     public bool isDead = false;
     int buffAmount = 0;
     
-    [SerializeField] int maxHP = 100;
+    public int maxHP = 100;
     public int currentHP;
 
     void Start()
