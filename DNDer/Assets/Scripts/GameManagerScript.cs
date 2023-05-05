@@ -89,6 +89,7 @@ public class GameManagerScript : MonoBehaviour
 
     public void ChoiceMenu()
     {
+        strBarUI.SetActive(false);
         chooseUI.SetActive(true);
     }
 
