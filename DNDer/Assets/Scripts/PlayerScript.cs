@@ -22,9 +22,9 @@ public class PlayerScript : MonoBehaviour
         currentHP = maxHP;
     }
 
-    private void Attack()
+    public void Attack(int hit)
     {
-        //
+        atkSuccess = hit;
         switch (atkSuccess)
         {
             case 0: //Attack failed
@@ -46,8 +46,9 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    private void Defend(int enemyDMG)
+    public void Defend(int hit, int enemyDMG)
     {
+        defSuccess = hit;
         switch (defSuccess)
         {
             case 0: //Defence failed

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class attackBar : MonoBehaviour
 {
+    [SerializeField] GameManagerScript gm;
     [SerializeField] float speed = 1f;
     [SerializeField] float minX ;
     [SerializeField] float maxX ;
@@ -31,5 +32,6 @@ public class attackBar : MonoBehaviour
     public void Stop()
     {
         stopped = true;
+        gm.StrBar(Mathf.Abs((minX + maxX) / 2 - hitter.rect.x));
     }
 }

@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] Transform[] enemyPos;
     [SerializeField] GameObject chooseUI;
     [SerializeField] GameObject strBarUI;
+    [SerializeField] TextMeshProUGUI commentText;
+    [SerializeField] float maxPerfectHit;
+    [SerializeField] float maxSuccessfulHit;
 
     EnemyScript[] enemies;
 
@@ -87,11 +92,55 @@ public class GameManagerScript : MonoBehaviour
         choseAttack = decision;
         chooseUI.SetActive(false);
         strBarUI.SetActive(true);
-        StrBar();
     }
-    public void StrBar()
+    public void StrBar(float barPos)
     {
         //read bar %
+        //need to change how player.Attack and Defend work
+        if(barPos < maxPerfectHit)
+        {
+            //perfect
+            Debug.Log("perfect");
+            if (choseAttack)
+            {
+                //player.Attack(2);
+                commentText.text = "Perfect Hit!";
+            }
+            else
+            {
+                //player.Defend(2, 0);
+                commentText.text = "Perfect Defence!";
+            }
+        }
+        else if(barPos < maxSuccessfulHit)
+        {
+            //not perfect
+            Debug.Log("hit");
+            if (choseAttack)
+            {
+                //player.Attack(1);
+                commentText.text = "Successful Hit!";
+            }
+            else
+            {
+                //player.Defend(2, 0);
+                commentText.text = "Successful Defence!";
+            }
+        }
+        else
+        {
+            //failed
+            Debug.Log("failure");
+            if (choseAttack)
+            {
+                //player.Attack(2);
+            }
+            else
+            {
+                //player.Defend(2, 0);
+            }
+            commentText.text = "You are a failure in the eyes of your ancestors";
+        }
         //change affection if relevant
         //text based on success% and affection
         PlayActions();
