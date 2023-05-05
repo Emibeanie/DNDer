@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/main menu.unity
+    guid: c0870a54d4a852944a1c61c240d480a5
+  - enabled: 1
+    path: Assets/Scenes/Fight.unity
+    guid: 80310b9c32fe83d4697c37a72b641741
+  - enabled: 1
     path: Assets/Scenes/Attack bar.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1

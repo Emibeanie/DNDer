@@ -99,8 +99,18 @@ public class GameManagerScript : MonoBehaviour
 
     public void PlayActions()
     {
+<<<<<<< HEAD
         actionIndex++;
         switch (actionIndex)
+=======
+        //if attack was chosen, attack first enemy, if enemy dies destroy enemy and advance enemy2
+        if(choseAttack && !enemies[0].IsEnemyDead()) enemies[0].EnemyTakesDamage(player.atk);
+        if (!enemies[0].IsEnemyDead()) AdvanceEnemyArray();
+        //companion action
+        lover.SpecialMove();
+        //enemy1 action (if def was chosen proc def), if relevant change affection
+        foreach (var enemy in enemies)
+>>>>>>> origin/Yoav
         {
             case 0:
                 if (choseAttack) player.PlayerAttack(barScore);
@@ -122,14 +132,29 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     public void EffectsActions()
     {
 
     }
 
+=======
+>>>>>>> origin/Yoav
     public void TypeCommentText(string txt)
     {
         commentText.text = txt;
+    }
+
+    private void AdvanceEnemyArray()
+    {
+        for (int i = 0; i < enemies.Length - 1; i++)
+        {
+            enemies[i] = enemies[i + 1];
+        }
+        if (enemies.Length > 1)
+        {
+            enemies[enemies.Length - 1] = null;
+        }
     }
 
     private void Win()
