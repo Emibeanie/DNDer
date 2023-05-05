@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2761509420942766931}
   - component: {fileID: 7502963066425131537}
   m_Layer: 0
-  m_Name: Lover3
+  m_Name: Lover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
