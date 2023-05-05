@@ -2,31 +2,83 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TinderController : MonoBehaviour
 {
-    public SpriteRenderer mySprite;
-    public Texture2D[] textures;
-    public int currentTextureIndex = 0;
+    //array of tinder profile sprites
+    public SpriteRenderer[] sprites;
 
-    public void ChangeTexture()
+    public float swipeThreshold = 50f;
+    public float swipeSpeed = 10f;
+
+    private Vector2 startSwipePos;
+    private Vector2 endSwipePos;
+    
+    public void Start()
     {
-        currentTextureIndex++;
-        if (currentTextureIndex >= textures.Length)
-        {
-            currentTextureIndex = 0;
-        }
-        Texture2D newTexture = textures[currentTextureIndex];
-        Sprite originalSprite = mySprite.sprite;
-        Vector2 pivot = new Vector2(originalSprite.rect.x / originalSprite.rect.width, originalSprite.rect.y / originalSprite.rect.height);
-        Sprite newSprite = Sprite.Create(newTexture, originalSprite.rect, pivot);
 
-        mySprite.sprite = newSprite;
+       // myfront.sortingOrder = 10;
         
-        //Sprite newSprite = Sprite.Create(newTexture, new Rect(0, 0, newTexture.width, newTexture.height), Vector2.zero);
-        //Vector2 originalPivot = mySprite.sprite.pivot;
-        //newSprite.pivot = originalPivot;
-        //mySprite.sprite = newSprite;
-        //mySprite.transform.position = new Vector3((float)-19.3901997, (float)7.7020998, (float)-0.922304749);
+    }
+
+    public void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            startSwipePos = Input.mousePosition;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            endSwipePos = Input.mousePosition;
+
+            float swipeDistance = (endSwipePos - startSwipePos).magnitude;
+
+            if (swipeDistance > swipeThreshold)
+            {
+                bool swipeRight = endSwipePos.x - startSwipePos.x > 0;
+                bool swipeLeft = endSwipePos.x - startSwipePos.x < 0;
+                
+                float swipeDirection = Mathf.Sign(endSwipePos.x - startSwipePos.x);
+
+                if (swipeRight)
+                {
+                    Debug.Log("Swiped right");
+                    SceneManager.LoadScene("Main Menu");
+                }
+                else if (swipeLeft)
+                {
+                    Debug.Log("Swiped left");
+                    // swipe left - move current front sprite to the back
+                    SpriteRenderer frontSpriteRenderer = null;
+                    int frontSpriteIndex = -1;
+                    for (int i = 0; i < sprites.Length; i++)
+                    {
+                        if (frontSpriteRenderer == null || sprites[i].sortingOrder > frontSpriteRenderer.sortingOrder)
+                        {
+                            frontSpriteRenderer = sprites[i];
+                            frontSpriteIndex = i;
+                        }
+                    }
+
+                    if (frontSpriteRenderer != null)
+                    {
+                        // Move the front sprite to the back
+                        frontSpriteRenderer.sortingOrder = 0;
+
+                        // Move the other sprites forward
+                        for (int i = 0; i < sprites.Length; i++)
+                        {
+                            if (i != frontSpriteIndex)
+                            {
+                                sprites[i].sortingOrder++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
