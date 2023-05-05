@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 456117356970998394}
   - component: {fileID: 4043359294537031867}
+  - component: {fileID: 2080518485}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -130,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
-  anim: {fileID: 0}
+  anim: {fileID: 2080518485}
   attacks: []
   isPoisoned: 0
   poisonCount: 0
@@ -139,3 +140,24 @@ MonoBehaviour:
   currentHP: 0
   maxAtt: 10
   maxDef: 5
+--- !u!95 &2080518485
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434401675913357216}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0a3b5b0af56f6e343b7e9aa8210859f2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

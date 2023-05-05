@@ -18,7 +18,7 @@ public class attackBar : MonoBehaviour
     [SerializeField] Sprite defendHitter;
     [SerializeField] Color attackColor;
     [SerializeField] Color defendColor;
-    bool stopped = false;
+    public bool stopped = false;
 
     private float dir = 1f;
 
@@ -29,6 +29,7 @@ public class attackBar : MonoBehaviour
     }
     private void OnEnable()
     {
+        stopped = false;
         if (gm.isAttacking())
         {
             button.GetComponent<Image>().color = attackColor;

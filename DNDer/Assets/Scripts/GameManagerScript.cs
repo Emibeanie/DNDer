@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Net;
+using UnityEditor.Experimental.GraphView;
+using Unity.VisualScripting;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] float minSuccessfulHit;
 
     EnemyScript[] enemies;
+    CharacterScript[] allCharacters;
 
     int currentFight = -1;
     bool choseAttack = true;
@@ -26,6 +29,8 @@ public class GameManagerScript : MonoBehaviour
 
     int actionIndex = -1;
     bool actionMode = false;
+
+    bool effectsMode = false;
 
     // Start is called before the first frame update
     void Start()
@@ -51,11 +56,15 @@ public class GameManagerScript : MonoBehaviour
         }
         FightScript fight = fights[currentFight];
         enemies = new EnemyScript[fight.enemies.Length];
+        allCharacters = new CharacterScript[fight.enemies.Length + 2];
+        allCharacters[0] = player;
+        allCharacters[1] = lover;
         for (int i = 0; i < fight.enemies.Length; i++)
         {
             enemies[i] = Instantiate(fight.enemies[i]);
             enemies[i].transform.position = enemyPos[i].position;
             enemies[i].set_target(player);
+            allCharacters[i+2] = enemies[i];
         }
         player.set_target(enemies[0]);
         lover.set_target(enemies[0]);
@@ -80,6 +89,7 @@ public class GameManagerScript : MonoBehaviour
 
     public void ChoiceMenu()
     {
+        strBarUI.SetActive(false);
         chooseUI.SetActive(true);
     }
 
@@ -94,6 +104,7 @@ public class GameManagerScript : MonoBehaviour
         if (barPos > minPerfectHit) barPos = 1;
         else if (barPos < minSuccessfulHit) barPos = 0;
         barScore = barPos;
+        actionMode = true;
         PlayActions();
     }
 
@@ -123,10 +134,13 @@ public class GameManagerScript : MonoBehaviour
                 enemies[0].attack();
                 break;
             case 3:
-                if(enemies.Length > 1) enemies[1].attack();
+                if (enemies.Length > 1) enemies[1].attack();
+                else PlayActions();
                 break;
             case 4:
                 actionIndex = -1;
+                actionMode = false;
+                effectsMode = true;
                 EffectsActions();
                 break;
         }
@@ -135,14 +149,47 @@ public class GameManagerScript : MonoBehaviour
 <<<<<<< HEAD
     public void EffectsActions()
     {
-
+        actionIndex++;
+        if (actionIndex >= allCharacters.Length)
+        {
+            effectsMode = false;
+            DisposeDead();
+        }
+        else if (allCharacters[actionIndex].isPoisoned) allCharacters[actionIndex].poisonTick();
+        else EffectsActions();
     }
 
+<<<<<<< HEAD
 =======
 >>>>>>> origin/Yoav
     public void TypeCommentText(string txt)
+=======
+    public void DisposeDead()
+>>>>>>> Sharron
     {
-        commentText.text = txt;
+        if (enemies[0].isDead)
+        {
+            if (enemies.Length > 1)
+            {
+                if (enemies[1].isDead)
+                {
+                    NextFight();
+                    return;
+                }
+                else
+                {
+                    enemies = new EnemyScript[] { enemies[1] };
+                }
+            }
+            else
+            {
+                if (enemies[1].isDead)
+                {
+                    enemies = new EnemyScript[] { enemies[0] };
+                }
+            }
+        }
+        Setup();
     }
 
     private void AdvanceEnemyArray()
@@ -159,7 +206,7 @@ public class GameManagerScript : MonoBehaviour
 
     private void Win()
     {
-
+        Debug.Log("WIN!");
     }
 
     public bool isAttacking()
@@ -170,5 +217,6 @@ public class GameManagerScript : MonoBehaviour
     public void animation_ended(CharacterScript character)
     {
         if (actionMode) PlayActions();
+        else if (effectsMode) EffectsActions();
     }
 }
