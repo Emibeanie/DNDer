@@ -56,4 +56,6 @@ public class attackBar : MonoBehaviour
         stopped = true;
         gm.StrBar(Mathf.Abs((minY + maxY) / 2 - hitter.anchoredPosition.y));
     }
+
+    
 }
