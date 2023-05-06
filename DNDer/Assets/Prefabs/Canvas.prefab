@@ -225,7 +225,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popText: {fileID: 1849520547133296360}
-  prefab: {fileID: 1740686810948474947}
+  duration: 0
+  prefab: {fileID: 0}
 --- !u!1 &4274591045688511413
 GameObject:
   m_ObjectHideFlags: 0

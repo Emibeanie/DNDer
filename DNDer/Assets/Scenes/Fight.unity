@@ -675,17 +675,43 @@ MonoBehaviour:
   dialogueText: {fileID: 237635789}
   typingSpeed: 0.05
   displayTime: 3
+--- !u!1 &1548402695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1740686810948474947, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+  m_PrefabInstance: {fileID: 4274591046190215389}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1548402698 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1849520547133296360, guid: dac045f50a5498245b620a64bb19de34, type: 3}
   m_PrefabInstance: {fileID: 4274591046190215389}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1548402695}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1548402700
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548402695}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a6debf19b1617d7459bdf36659bfdd4c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1646735480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,6 +1323,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1740686810948474947, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849520547133296360, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849520547133296360, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: m_fontColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849520547133296360, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849520547133296360, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849520547133296360, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849520547133296360, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190335
+      objectReference: {fileID: 0}
     - target: {fileID: 4274591045688511412, guid: dac045f50a5498245b620a64bb19de34, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1386,9 +1440,33 @@ PrefabInstance:
       value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 5459772910424297378, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: xPos
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459772910424297378, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: yPos
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459772910424297378, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 1548402695}
+    - target: {fileID: 5459772910424297378, guid: dac045f50a5498245b620a64bb19de34, type: 3}
       propertyPath: popText
       value: 
       objectReference: {fileID: 1548402698}
+    - target: {fileID: 5459772910424297378, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: duration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5459772910424297378, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: fadeAnimation
+      value: 
+      objectReference: {fileID: 1548402700}
+    - target: {fileID: 9016647379398655323, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -199.99998
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dac045f50a5498245b620a64bb19de34, type: 3}
 --- !u!1001 &7623512696919185203

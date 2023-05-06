@@ -70,8 +70,6 @@ public class CharacterScript : MonoBehaviour
         currentHP -= dmg;
         if (currentHP <= 0)
             gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.die, this, "died"));
-        Debug.Log("dmgNumbers type: " + dmgNumbers.GetType().ToString()); 
-        //DamagePopupScript damagePopup = Instantiate(dmgNumbers);
         dmgNumbers.ShowDamageText(dmg, transform.position);
     }
 
