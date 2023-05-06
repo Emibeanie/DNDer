@@ -7,6 +7,7 @@ using System.Net;
 using UnityEditor.Experimental.GraphView;
 using Unity.VisualScripting;
 using Mono.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -41,8 +42,8 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //sceneMemory = GameObject.FindAnyObjectByType<SceneMemoryScript>();
-        //loverPrefab = sceneMemory.lovers[sceneMemory.character_index];
+        sceneMemory = GameObject.FindAnyObjectByType<SceneMemoryScript>();
+        loverPrefab = sceneMemory.lovers[sceneMemory.character_index];
         chooseUI.SetActive(false);
         strBarUI.SetActive(false);
         lover = Instantiate(loverPrefab);
@@ -223,6 +224,14 @@ public class GameManagerScript : MonoBehaviour
     {
         actionMode = false;
         Debug.Log("WIN!");
+        if(lover.affection < 6)
+        {
+            SceneManager.LoadScene("Dinder");
+        }
+        else
+        {
+            SceneManager.LoadScene("Ending");
+        }
     }
 
     public bool isAttacking()

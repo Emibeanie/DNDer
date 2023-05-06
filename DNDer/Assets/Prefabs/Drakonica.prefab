@@ -219,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
   anim: {fileID: 8721415040485092119}
+  dmgNumbers: {fileID: 0}
   attacks:
   - {fileID: 6712455499430592583, guid: 11cfbb64d401eea4c88e1effe76996ae, type: 3}
   - {fileID: 8161331021089417166, guid: d7ec114906fb96840893f518f4a77391, type: 3}
@@ -228,6 +229,7 @@ MonoBehaviour:
   isDead: 0
   maxHP: 20
   currentHP: 0
+  currently_inflicting: 0
   player: {fileID: 0}
   specialAttackPrefab: {fileID: 8161331021089417166, guid: d7ec114906fb96840893f518f4a77391, type: 3}
   lastDamage: -1
