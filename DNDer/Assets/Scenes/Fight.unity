@@ -254,6 +254,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d9b14c54bacab41b4646d1e0028440, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &456191976 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8823138567536780702, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+  m_PrefabInstance: {fileID: 4274591046190215389}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &583995574
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +386,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4043359294537031867, guid: 4cde8cb9471e6fd42a2b769e16984e27, type: 3}
+      propertyPath: dmgText
+      value: 
+      objectReference: {fileID: 456191976}
     - target: {fileID: 4434401675913357216, guid: 4cde8cb9471e6fd42a2b769e16984e27, type: 3}
       propertyPath: m_Name
       value: Player
@@ -941,6 +950,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 515823956861669538, guid: 175ab602b81de6e4487f63b180e0bedb, type: 3}
+      propertyPath: dmgText
+      value: 
+      objectReference: {fileID: 456191976}
     - target: {fileID: 8123592091893783528, guid: 175ab602b81de6e4487f63b180e0bedb, type: 3}
       propertyPath: m_Name
       value: Lover
@@ -1308,6 +1321,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 632287403}
+    - target: {fileID: 8823138567536780702, guid: dac045f50a5498245b620a64bb19de34, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dac045f50a5498245b620a64bb19de34, type: 3}
 --- !u!1001 &7623512696919185203

@@ -386,6 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
   anim: {fileID: 8721415040485092119}
+  dmgText: {fileID: 4802681085948546139, guid: c3f0265bf499f62489bed1dcdf0ab11c, type: 3}
   attacks:
   - {fileID: 6712455499430592583, guid: 11cfbb64d401eea4c88e1effe76996ae, type: 3}
   - {fileID: 5471268724030818771, guid: 1f40592eb888363479b385bb38ff8b3d, type: 3}

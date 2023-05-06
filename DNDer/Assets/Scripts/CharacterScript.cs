@@ -7,6 +7,7 @@ public class CharacterScript : MonoBehaviour
 {
     [SerializeField] protected GameManagerScript gm;
     [SerializeField] public Animator anim;
+    [SerializeField] GameObject dmgText;
 
     public AttackScript[] attacks;
     public bool isPoisoned = false;
@@ -67,6 +68,8 @@ public class CharacterScript : MonoBehaviour
         currentHP -= dmg;
         if (currentHP <= 0)
             gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.die, this, "player_attack"));
+        DamageNumbersScript dmgIndicator = Instantiate(dmgText, transform.position, Quaternion.identity).GetComponent<DamageNumbersScript>();
+        dmgIndicator.SetDamageText(dmg);
     }
 
     public void Heal(int healAmount)
