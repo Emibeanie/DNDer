@@ -47,3 +47,5 @@ MonoBehaviour:
   onPlayer: 1
   dmg: 0
   animationTrigger: fire
+  source: {fileID: 7077699658588718407, guid: fe243e3790794ed428bfb056e4f7f4f4, type: 3}
+  clip: {fileID: 8300000, guid: 3a131f390e831ed4191fbbae8ee7c86f, type: 3}

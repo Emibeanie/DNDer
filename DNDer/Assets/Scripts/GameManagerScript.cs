@@ -41,8 +41,8 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //sceneMemory = GameObject.FindAnyObjectByType<SceneMemoryScript>();
-        //loverPrefab = sceneMemory.lovers[sceneMemory.character_index];
+        sceneMemory = GameObject.FindAnyObjectByType<SceneMemoryScript>();
+        loverPrefab = sceneMemory.lovers[sceneMemory.character_index];
         chooseUI.SetActive(false);
         strBarUI.SetActive(false);
         lover = Instantiate(loverPrefab);

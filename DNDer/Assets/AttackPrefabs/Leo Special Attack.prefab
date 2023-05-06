@@ -47,3 +47,5 @@ MonoBehaviour:
   onPlayer: 1
   dmg: 10
   animationTrigger: sword
+  source: {fileID: 6142267941848330811, guid: 209dd3e321e94984cb5f0d29b13c650e, type: 3}
+  clip: {fileID: 8300000, guid: 033c9fd940cd99943a59bd9ae46fddb8, type: 3}

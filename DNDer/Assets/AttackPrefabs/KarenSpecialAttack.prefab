@@ -48,3 +48,5 @@ MonoBehaviour:
   dmg: 0
   animationTrigger: annoy
   buffAmount: 1
+  source: {fileID: 7764871036237452231, guid: d84a6274f883e784b84fd7fecca8985b, type: 3}
+  clip: {fileID: 8300000, guid: 70115690ae28410489ac3cfb7d8afbc5, type: 3}

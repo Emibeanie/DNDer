@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class DrkonikaSpacialAttack : AttackScript
 {
+    public AudioSource source;
+    public AudioClip clip;
     public override void effect(CharacterScript target)
     {
+        source.PlayOneShot(source.clip);
         GameManagerScript gm = GameObject.FindAnyObjectByType<GameManagerScript>();
         foreach (EnemyScript enemy in gm.enemies)
         {
