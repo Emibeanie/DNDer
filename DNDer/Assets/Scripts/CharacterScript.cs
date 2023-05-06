@@ -8,7 +8,7 @@ public class CharacterScript : MonoBehaviour
 {
     [SerializeField] protected GameManagerScript gm;
     [SerializeField] public Animator anim;
-    [SerializeField] DamagePopupScript dmgNumbers;
+    [SerializeField] public DamagePopupScript dmgNumbers;
 
     public List<AttackScript> attacks;
     public bool isPoisoned = false;
@@ -26,6 +26,8 @@ public class CharacterScript : MonoBehaviour
     
     public int maxHP = 100;
     public int currentHP;
+
+    public int currently_inflicting = 0;
 
     void Start()
     {
@@ -67,9 +69,10 @@ public class CharacterScript : MonoBehaviour
     public virtual void getHit(int dmg)
     {
         currentHP -= dmg;
+        currently_inflicting = dmg;
         if (currentHP <= 0)
             gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.die, this, "died"));
-        dmgNumbers.ShowDamageText(dmg, transform.position);
+        
     }
 
     public void Heal(int healAmount)
