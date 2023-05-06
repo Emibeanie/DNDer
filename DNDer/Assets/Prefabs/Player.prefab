@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 1329472657, guid: e07992397e19db949969607c729e492b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 456117356970998394}
   - component: {fileID: 4043359294537031867}
-  - component: {fileID: 2080518485}
+  - component: {fileID: 1711473084297944680}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
-  anim: {fileID: 2080518485}
+  anim: {fileID: 1711473084297944680}
   attacks: []
   isPoisoned: 0
   poisonCount: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   currentHP: 0
   maxAtt: 10
   maxDef: 5
---- !u!95 &2080518485
+--- !u!95 &1711473084297944680
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
