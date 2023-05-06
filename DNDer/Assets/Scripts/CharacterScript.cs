@@ -34,7 +34,6 @@ public class CharacterScript : MonoBehaviour
     public void GetBuff(int buffAmount)
     {
         this.buffAmount = buffAmount;
-        gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.getBuff, this, "attack"));
     }
     public void set_target(CharacterScript target)
     {

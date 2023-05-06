@@ -135,7 +135,8 @@ MonoBehaviour:
   gm: {fileID: 0}
   anim: {fileID: 8721415040485092119}
   attacks:
-  - {fileID: 5348327009697952202, guid: b76f797e093ff8c48bbd3398955b42c3, type: 3}
+  - {fileID: 6712455499430592583, guid: 11cfbb64d401eea4c88e1effe76996ae, type: 3}
+  - {fileID: 6712455499430592583, guid: 11cfbb64d401eea4c88e1effe76996ae, type: 3}
   isPoisoned: 0
   poisonCount: 0
   currentAttack: -1
