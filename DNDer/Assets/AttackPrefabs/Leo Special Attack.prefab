@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPlayer: 1
   dmg: 10
-  animationTrigger: attack
+  animationTrigger: sword

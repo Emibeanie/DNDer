@@ -19,12 +19,12 @@ public class TinderController : MonoBehaviour
 
     private Vector2 startSwipePos;
     private Vector2 endSwipePos;
+
+    SceneMemoryScript sceneMemory;
     
     public void Start()
     {
-
-       // myfront.sortingOrder = 10;
-        
+        sceneMemory = GameObject.FindAnyObjectByType<SceneMemoryScript>();
     }
 
     public void Update()
@@ -49,13 +49,23 @@ public class TinderController : MonoBehaviour
 
                 if (swipeRight)
                 {
-                    Debug.Log("Swiped right");
+                    int highest = -1;
+                    int highestIndex = -1;
+                    for(int i = 0; i < sprites.Length; i++)
+                    {
+                        if (highest < sprites[i].sortingOrder)
+                        {
+                            highest = sprites[i].sortingOrder;
+                            highestIndex = i;
+                        }
+                    }
+                    sceneMemory.character_index = highestIndex;
+                    
                     audioSource.PlayOneShot(swipeRightSound);
                     SceneManager.LoadScene("Fight");
                 }
                 else if (swipeLeft)
                 {
-                    Debug.Log("Swiped left");
                     audioSource.PlayOneShot(swipeLeftSound);
                     // swipe left - move current front sprite to the back
                     SpriteRenderer frontSpriteRenderer = null;

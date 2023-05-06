@@ -34,13 +34,15 @@ public class GameManagerScript : MonoBehaviour
     bool actionMode = false;
 
     public DialogueScript dialogueBox;
-
+    public SceneMemoryScript sceneMemory;
 
     public List<turnAction> turnActions = new List<turnAction>();
 
     // Start is called before the first frame update
     void Start()
     {
+        //sceneMemory = GameObject.FindAnyObjectByType<SceneMemoryScript>();
+        //loverPrefab = sceneMemory.lovers[sceneMemory.character_index];
         chooseUI.SetActive(false);
         strBarUI.SetActive(false);
         lover = Instantiate(loverPrefab);

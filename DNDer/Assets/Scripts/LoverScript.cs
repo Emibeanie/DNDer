@@ -25,7 +25,7 @@ public class LoverScript : CharacterScript
     {
         affection += addAff;
         if (affection > maxAffection) affection = maxAffection;
-        anim.Play("player_attack");
+        anim.SetTrigger("love");
         likeTextIndex++;
         if (likeTextIndex >= likeText.Length) likeTextIndex = 0;
         gm.dialogueBox.Show(likeText[likeTextIndex]);
@@ -37,7 +37,7 @@ public class LoverScript : CharacterScript
         if (affection == affForSpecial) attacks.Remove(specialAttackPrefab);
         affection -= redAff;
         if (affection < 0) affection = 0;
-        anim.Play("player_attack");
+        anim.SetTrigger("bad_love");
         dislikeTextIndex++;
         if (dislikeTextIndex >= dislikeText.Length) dislikeTextIndex = 0;
         gm.dialogueBox.Show(dislikeText[dislikeTextIndex]);

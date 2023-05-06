@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dinder.unity
     guid: 907148ab4a5b0734f822ca4c1e12e61c
+  - enabled: 1
+    path: Assets/Scenes/Options.unity
+    guid: 1f3344c731f24124f8a005ed7ed3d50c
+  - enabled: 1
+    path: Assets/Scenes/ending.unity
+    guid: c3cdb0818a84b1642b1ae5952d2a6fbb
+  - enabled: 1
+    path: Assets/Scenes/main menu.unity
+    guid: c0870a54d4a852944a1c61c240d480a5
   m_configObjects: {}
