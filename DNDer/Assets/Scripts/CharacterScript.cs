@@ -8,7 +8,7 @@ public class CharacterScript : MonoBehaviour
     [SerializeField] protected GameManagerScript gm;
     [SerializeField] public Animator anim;
 
-    public AttackScript[] attacks;
+    public List<AttackScript> attacks;
     public bool isPoisoned = false;
     public int poisonCount = 0;
 
@@ -43,7 +43,7 @@ public class CharacterScript : MonoBehaviour
 
     public virtual void ChooseAttack()
     {
-        currentAttack = new System.Random().Next(0, attacks.Length);
+        currentAttack = new System.Random().Next(0, attacks.Count);
     }
     //public virtual void AssignAttack()
     //{

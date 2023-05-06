@@ -15,6 +15,7 @@ public class DialogueScript : MonoBehaviour
     {
         gameObject.SetActive(true);
         fullText = text;
+        currentText = "";
         dialogueText.text = "";
         StartCoroutine(TypeText());
     }

@@ -7,11 +7,17 @@ using UnityEngine.UI;
 public class AffectionBarScript : MonoBehaviour
 {
     [SerializeField] Image affBar;
-    [SerializeField] LoverScript lover;
+    GameManagerScript gm;
 
     float lerpSpeed;
 
     // Update is called once per frame
+
+    private void Start()
+    {
+        gm = GameObject.FindObjectOfType<GameManagerScript>();
+    }
+
     void FixedUpdate()
     {
         lerpSpeed = 3f * Time.deltaTime;
@@ -19,6 +25,6 @@ public class AffectionBarScript : MonoBehaviour
     }
     void FillAffBar()
     {
-        affBar.fillAmount = Mathf.Lerp(affBar.fillAmount, (float)lover.affection / (float)lover.maxAffection, lerpSpeed);
+        affBar.fillAmount = Mathf.Lerp(affBar.fillAmount, (float)gm.lover.affection / (float)gm.lover.maxAffection, lerpSpeed);
     }
 }

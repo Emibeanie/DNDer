@@ -6,9 +6,14 @@ using UnityEngine.UI;
 public class HPBarScript : MonoBehaviour
 {
     [SerializeField] Image HPBar;
-    [SerializeField] PlayerScript player;
+    GameManagerScript gm;
 
     float lerpSpeed;
+
+    private void Start()
+    {
+        gm = GameObject.FindObjectOfType<GameManagerScript>();
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -18,6 +23,6 @@ public class HPBarScript : MonoBehaviour
     }
     void FillHPBar()
     {
-        HPBar.fillAmount = Mathf.Lerp(HPBar.fillAmount, (float)player.currentHP / (float)player.maxHP, lerpSpeed);
+        HPBar.fillAmount = Mathf.Lerp(HPBar.fillAmount, (float)gm.player.currentHP / (float)gm.player.maxHP, lerpSpeed);
     }
 }

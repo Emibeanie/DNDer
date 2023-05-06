@@ -10,26 +10,30 @@ using Mono.Collections.Generic;
 
 public class GameManagerScript : MonoBehaviour
 {
-    [SerializeField] PlayerScript player;
-    [SerializeField] LoverScript lover;
+    [SerializeField] public PlayerScript player;
     [SerializeField] FightScript[] fights;
     [SerializeField] Transform[] enemyPos;
+    [SerializeField] Transform loverPos;
     [SerializeField] GameObject chooseUI;
     [SerializeField] GameObject strBarUI;
     [SerializeField] TextMeshProUGUI commentText;
 
-    [SerializeField] float minPerfectHit;
-    [SerializeField] float minSuccessfulHit;
+    [SerializeField] float maxPerfectHit;
+    [SerializeField] float maxSuccessfulHit;
 
     EnemyScript[] enemies;
     CharacterScript[] allCharacters;
+
+    public LoverScript loverPrefab;
+    public LoverScript lover;
 
     int currentFight = -1;
     bool choseAttack = true;
     float barScore = 0;
 
-    int actionIndex = -1;
     bool actionMode = false;
+
+    public DialogueScript dialogueBox;
 
 
     public List<turnAction> turnActions = new List<turnAction>();
@@ -39,6 +43,8 @@ public class GameManagerScript : MonoBehaviour
     {
         chooseUI.SetActive(false);
         strBarUI.SetActive(false);
+        lover = Instantiate(loverPrefab);
+        lover.transform.position = loverPos.position;
         SetPlayer();
         NextFight();
     }
@@ -103,8 +109,20 @@ public class GameManagerScript : MonoBehaviour
     }
     public void StrBar(float barPos)
     {
-        if (barPos > minPerfectHit) barPos = 1;
-        else if (barPos < minSuccessfulHit) barPos = 0;
+        if (barPos < maxPerfectHit)
+        {
+            barPos = 1;
+            lover.CheckTriggers(AffectionTrigger.Trigger.perfect);
+            if (choseAttack) lover.CheckTriggers(AffectionTrigger.Trigger.perfect_att);
+            else lover.CheckTriggers(AffectionTrigger.Trigger.perfect_def);
+        }
+        else if (barPos > maxSuccessfulHit)
+        {
+            barPos = 0;
+            lover.CheckTriggers(AffectionTrigger.Trigger.miss);
+            if (choseAttack) lover.CheckTriggers(AffectionTrigger.Trigger.miss_hit);
+            else lover.CheckTriggers(AffectionTrigger.Trigger.miss_def);
+        }
         barScore = barPos;
         actionMode = true;
         CollectActions();
@@ -130,18 +148,6 @@ public class GameManagerScript : MonoBehaviour
 
         actionMode = true;
         PlayActions();
-    }
-
-    public void EffectsActions()
-    {
-        actionIndex++;
-        if (actionIndex >= allCharacters.Length)
-        {
-            actionIndex = -1;
-            DisposeDead();
-        }
-        else if (allCharacters[actionIndex].isPoisoned) allCharacters[actionIndex].poisonTick();
-        else EffectsActions();
     }
 
     public void PlayActions()

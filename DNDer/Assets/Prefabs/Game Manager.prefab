@@ -45,11 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  lover: {fileID: 0}
   fights:
   - {fileID: 0}
-  enemyPos: []
+  enemyPos:
+  - {fileID: 0}
+  - {fileID: 0}
+  loverPos: {fileID: 0}
   chooseUI: {fileID: 0}
   strBarUI: {fileID: 0}
-  maxPerfectHit: 0
-  maxSuccessfulHit: 0
+  commentText: {fileID: 0}
+  maxPerfectHit: 0.15
+  maxSuccessfulHit: 0.4
+  loverPrefab: {fileID: 515823956861669538, guid: 175ab602b81de6e4487f63b180e0bedb, type: 3}
+  lover: {fileID: 0}
+  dialogueBox: {fileID: 0}

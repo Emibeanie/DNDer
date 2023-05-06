@@ -57,7 +57,7 @@ public class attackBar : MonoBehaviour
     {
         stopped = true;
         button.enabled = false;
-        gm.StrBar(Mathf.Abs((minY + maxY) / 2 - hitter.anchoredPosition.y));
+        gm.StrBar(Mathf.Abs((minY + maxY) / 2 - hitter.anchoredPosition.y) / (maxY-minY));
     }
 
     
