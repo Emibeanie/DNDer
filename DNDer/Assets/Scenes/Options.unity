@@ -418,7 +418,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945241991}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: SetFullScreen
         m_Mode: 6
@@ -937,7 +937,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945241991}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: BackToMain
         m_Mode: 1
@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1945241992}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: set_volume
         m_Mode: 0
@@ -1391,8 +1391,8 @@ GameObject:
   - component: {fileID: 1945241989}
   - component: {fileID: 1945241988}
   - component: {fileID: 1945241987}
-  - component: {fileID: 1945241991}
   - component: {fileID: 1945241992}
+  - component: {fileID: 1945241991}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1486,19 +1486,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1945241991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1945241986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c85d6b0e3354ad94da8b690add6c733b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!82 &1945241992
+--- !u!82 &1945241991
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1507,8 +1495,8 @@ AudioSource:
   m_GameObject: {fileID: 1945241986}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 175b73b63c8c9ed42aa1ed98826ad706, type: 2}
-  m_audioClip: {fileID: 8300000, guid: ffec51cd49518e54bb59c76cb0ab82ce, type: 3}
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1594,6 +1582,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1945241992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945241986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c85d6b0e3354ad94da8b690add6c733b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMixer: {fileID: 24100000, guid: 175b73b63c8c9ed42aa1ed98826ad706, type: 2}
+  LobbyMusic: {fileID: 8300000, guid: ffec51cd49518e54bb59c76cb0ab82ce, type: 3}
+  Source: {fileID: 1945241991}
 --- !u!1 &1975182377
 GameObject:
   m_ObjectHideFlags: 0
