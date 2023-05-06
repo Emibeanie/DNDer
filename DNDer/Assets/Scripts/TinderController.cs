@@ -51,7 +51,7 @@ public class TinderController : MonoBehaviour
                 {
                     Debug.Log("Swiped right");
                     audioSource.PlayOneShot(swipeRightSound);
-                    SceneManager.LoadScene("Main Menu");
+                    SceneManager.LoadScene("Fight");
                 }
                 else if (swipeLeft)
                 {

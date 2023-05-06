@@ -3,21 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
-    public AudioMixer mainMixer;
-    public AudioClip LobbyMusic;
-    public AudioSource Source;
-
-    public void Start()
-    {
-        Source.clip = LobbyMusic;
-        Source.Play();
-    }
+    public AudioMixer masterMixer;
+    [SerializeField] Slider VolSlider;
     public void SetVolume(float volume)
     {
-        mainMixer.SetFloat("volume", volume);
+        masterMixer.SetFloat("volume", VolSlider.value);
     }
 
     public void SetFullScreen(bool isFullScreen)
