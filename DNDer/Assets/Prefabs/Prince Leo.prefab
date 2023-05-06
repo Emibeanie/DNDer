@@ -244,9 +244,13 @@ MonoBehaviour:
   likeText:
   - Don't worry Im here for you, baby
   - LEO FOR THE RESCUE!
+  - I would have done that better..
+  - Need a hand?
   dislikeText:
   - Pfff begginers luck
   - Dont waste all your power in one place...
+  - Could have done that too if i wanted
+  - Quite lucky are we?
   affForSpecial: 7
 --- !u!95 &8721415040485092119
 Animator:

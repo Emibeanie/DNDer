@@ -245,6 +245,9 @@ MonoBehaviour:
     rndWeight: 1
   likeText:
   - '*rolls eyes slowly*'
+  - It was ok i guess
+  - Not terrible...
+  - Im ALMOST impressed
   dislikeText:
   - Could you be any worse?
   - I'd like to speak to your manager

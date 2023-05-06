@@ -241,11 +241,14 @@ MonoBehaviour:
     negative: 1
     rndWeight: 2
   likeText:
-  - I like you
-  - You are amazing
+  - Bitch pop off!
+  - Yasss queen
+  - Its a vibe!
+  - House down boots MAMA
   dislikeText:
-  - Fuck you fucker
-  - go fuck yourself bitch
+  - Get lost loser!
+  - Worst date ever!!!
+  - Ugh! gross!
   affForSpecial: 7
 --- !u!95 &8721415040485092119
 Animator:
