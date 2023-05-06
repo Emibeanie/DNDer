@@ -14,7 +14,7 @@ public class PlayerScript : CharacterScript
     {
         int dmg = (int)(maxAtt * success) + buffAmount;
         gm.turnActions.Insert(0,
-            new turnAction(turnAction.ActionType.takeDamage, target, "player_attack",
+            new turnAction(turnAction.ActionType.takeDamage, target, "attack",
             dmg));
         if (gm.lover.lastDamage > -1)
         {

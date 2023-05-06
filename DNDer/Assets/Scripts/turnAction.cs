@@ -11,6 +11,7 @@ public class turnAction
     public float success;
     public CharacterScript acting;
     public string animation_name;
+    public GameManagerScript gm;
 
     public turnAction(ActionType actionType, CharacterScript acting, string animation_name, int amount = 0,float success = 0f)
     {
@@ -19,10 +20,12 @@ public class turnAction
         this.acting = acting;
         this.animation_name = animation_name;
         this.success = success;
+        gm = GameObject.FindAnyObjectByType<GameManagerScript>();
     }
     public void CallAction()
     {
-        acting.anim.SetTrigger("attack");
+        if (acting.isDead) gm.PlayActions();
+        acting.anim.SetTrigger(animation_name);
         //acting.anim.Play(animation_name);
         switch (actionType)
         {

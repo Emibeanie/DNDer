@@ -34,7 +34,7 @@ public class CharacterScript : MonoBehaviour
     public void GetBuff(int buffAmount)
     {
         this.buffAmount = buffAmount;
-        gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.getBuff, this, "player_attack"));
+        gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.getBuff, this, "attack"));
     }
     public void set_target(CharacterScript target)
     {
@@ -47,7 +47,7 @@ public class CharacterScript : MonoBehaviour
     }
     //public virtual void AssignAttack()
     //{
-    //    gm.turnActions.Enqueue(new turnAction(turnAction.ActionType.attack, this, "player_attack"));
+    //    gm.turnActions.Enqueue(new turnAction(turnAction.ActionType.attack, this, "attack"));
     //}
     //public virtual void AssignTakeDamage()
     //{
@@ -56,7 +56,7 @@ public class CharacterScript : MonoBehaviour
     public virtual void attack()
     {
         gm.turnActions.Insert(0,
-            new turnAction(turnAction.ActionType.takeDamage, target, "player_attack", 
+            new turnAction(turnAction.ActionType.takeDamage, target, "attack", 
             attacks[currentAttack].dmg + buffAmount));
         attacks[currentAttack].effect(target);
         buffAmount = 0;
@@ -66,7 +66,7 @@ public class CharacterScript : MonoBehaviour
     {
         currentHP -= dmg;
         if (currentHP <= 0)
-            gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.die, this, "player_attack"));
+            gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.die, this, "died"));
     }
 
     public void Heal(int healAmount)
@@ -80,7 +80,7 @@ public class CharacterScript : MonoBehaviour
     {
         //die
         isDead = true;
-        gameObject.SetActive(false);
+        GetComponentInChildren<SpriteRenderer>().color = Color.red;
     }
     public void animationEnd()
     {
@@ -93,7 +93,7 @@ public class CharacterScript : MonoBehaviour
             poisonCount--;
             currentHP--;
             if (currentHP <= 0)
-                gm.turnActions.Insert(0, new turnAction(turnAction.ActionType.die, this, "player_attack"));
+                gm.turnActions.Insert(0, new turnAction(turnAction.ActionType.die, this, "died"));
         }
         else isPoisoned = false;
     }

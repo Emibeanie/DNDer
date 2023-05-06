@@ -92,6 +92,11 @@ public class GameManagerScript : MonoBehaviour
             enemy.SetupAnimation();
         }
         lover.ChooseAttack();
+
+        player.set_target(enemies[0]);
+        lover.set_target(enemies[0]);
+
+
         ChoiceMenu();
     }
 
@@ -131,19 +136,19 @@ public class GameManagerScript : MonoBehaviour
     public void CollectActions()
     {
         if (choseAttack)
-            turnActions.Add(new turnAction(turnAction.ActionType.playerAttack, player, "player_attack", 0, barScore));
+            turnActions.Add(new turnAction(turnAction.ActionType.playerAttack, player, "attack", 0, barScore));
         else
-            turnActions.Add(new turnAction(turnAction.ActionType.playerDeffend, player, "player_attack", 0, barScore));
+            turnActions.Add(new turnAction(turnAction.ActionType.playerDeffend, player, "attack", 0, barScore));
 
         for(int i = 1; i < allCharacters.Length;i++)
         {
-            turnActions.Add(new turnAction(turnAction.ActionType.attack, allCharacters[i], "player_attack"));
+            turnActions.Add(new turnAction(turnAction.ActionType.attack, allCharacters[i], "attack"));
         }
 
         for(int i = 0; i < allCharacters.Length; i++)
         {
             if (allCharacters[i].isPoisoned)
-                turnActions.Add(new turnAction(turnAction.ActionType.takePoisonDamage, allCharacters[i], "player_attack"));
+                turnActions.Add(new turnAction(turnAction.ActionType.takePoisonDamage, allCharacters[i], "attack"));
         }
 
         actionMode = true;
@@ -157,7 +162,10 @@ public class GameManagerScript : MonoBehaviour
             turnAction action = turnActions[0];
             turnActions.RemoveAt(0);
             action.CallAction();
-            
+            if (action.actionType == turnAction.ActionType.die && enemies.Length > 1)
+            {
+                lover.set_target(enemies[1]);
+            }
         }
         else
         {
@@ -169,10 +177,12 @@ public class GameManagerScript : MonoBehaviour
     {
         if (enemies[0].isDead)
         {
+            Destroy(enemies[0]);
             if (enemies.Length > 1)
             {
                 if (enemies[1].isDead)
                 {
+                    Destroy(enemies[1]);
                     NextFight();
                     return;
                 }
@@ -183,17 +193,31 @@ public class GameManagerScript : MonoBehaviour
             }
             else
             {
-                if (enemies[1].isDead)
-                {
-                    enemies = new EnemyScript[] { enemies[0] };
-                }
+                NextFight();
+                return;
             }
+        }
+        else if (enemies.Length > 1)
+        {
+            if (enemies[1].isDead)
+            { 
+                Destroy(enemies[1]);
+                enemies = new EnemyScript[] { enemies[0] };
+            }
+        }
+        allCharacters = new CharacterScript[enemies.Length + 2];
+        allCharacters[0] = player;
+        allCharacters[1] = lover;
+        for(int i = 2; i< enemies.Length + 2;i++)
+        {
+            allCharacters[i] = enemies[i - 2];
         }
         Setup();
     }
 
     private void Win()
     {
+        actionMode = false;
         Debug.Log("WIN!");
     }
 
