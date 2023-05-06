@@ -799,6 +799,8 @@ MonoBehaviour:
   dialogueText: {fileID: 237635789}
   typingSpeed: 0.05
   displayTime: 3
+  audioSource: {fileID: 699205824}
+  popSound: {fileID: 8300000, guid: 468d4967696c6e54b83307ebf9e0300c, type: 3}
 --- !u!1 &1271277956
 GameObject:
   m_ObjectHideFlags: 0

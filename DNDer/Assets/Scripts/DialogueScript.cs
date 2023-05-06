@@ -8,6 +8,10 @@ public class DialogueScript : MonoBehaviour
     public float typingSpeed = 0.1f;
     public float displayTime = 3f;
 
+    //bubble SFX
+    public AudioSource audioSource;
+    public AudioClip popSound;
+
     private string fullText;
     private string currentText = "";
 
@@ -18,6 +22,7 @@ public class DialogueScript : MonoBehaviour
         currentText = "";
         dialogueText.text = "";
         StartCoroutine(TypeText());
+        audioSource.PlayOneShot(popSound);
     }
 
     IEnumerator TypeText()
