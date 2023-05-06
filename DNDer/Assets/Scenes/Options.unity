@@ -1072,8 +1072,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 992926363}
   m_HandleRect: {fileID: 856173350}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 10
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
@@ -1595,6 +1595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterMixer: {fileID: 24100000, guid: 34c50259f164faa4e8165d7a45b2d1e6, type: 2}
+  VolSlider: {fileID: 1583463573}
 --- !u!1 &1975182377
 GameObject:
   m_ObjectHideFlags: 0

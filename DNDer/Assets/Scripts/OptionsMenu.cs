@@ -8,9 +8,10 @@ using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour
 {
     public AudioMixer masterMixer;
+    [SerializeField] Slider VolSlider;
     public void SetVolume(float volume)
     {
-        masterMixer.SetFloat("volume", volume);
+        masterMixer.SetFloat("volume", VolSlider.value);
     }
 
     public void SetFullScreen(bool isFullScreen)
