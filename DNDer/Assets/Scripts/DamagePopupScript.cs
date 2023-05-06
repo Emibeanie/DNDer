@@ -34,10 +34,5 @@ public class DamagePopupScript : MonoBehaviour
         //popText.enabled = false;
         //StartCoroutine(FadeOut());
     }
-    public void func()
-    {
-        //fadeAnimation.Play("AnimDamageText");
-
-    }
 
 }
