@@ -10,26 +10,30 @@ using Mono.Collections.Generic;
 
 public class GameManagerScript : MonoBehaviour
 {
-    [SerializeField] PlayerScript player;
-    [SerializeField] LoverScript lover;
+    [SerializeField] public PlayerScript player;
     [SerializeField] FightScript[] fights;
     [SerializeField] Transform[] enemyPos;
+    [SerializeField] Transform loverPos;
     [SerializeField] GameObject chooseUI;
     [SerializeField] GameObject strBarUI;
     [SerializeField] TextMeshProUGUI commentText;
 
-    [SerializeField] float minPerfectHit;
-    [SerializeField] float minSuccessfulHit;
+    [SerializeField] float maxPerfectHit;
+    [SerializeField] float maxSuccessfulHit;
 
     EnemyScript[] enemies;
     CharacterScript[] allCharacters;
+
+    public LoverScript loverPrefab;
+    public LoverScript lover;
 
     int currentFight = -1;
     bool choseAttack = true;
     float barScore = 0;
 
-    int actionIndex = -1;
     bool actionMode = false;
+
+    public DialogueScript dialogueBox;
 
 
     public List<turnAction> turnActions = new List<turnAction>();
@@ -39,6 +43,8 @@ public class GameManagerScript : MonoBehaviour
     {
         chooseUI.SetActive(false);
         strBarUI.SetActive(false);
+        lover = Instantiate(loverPrefab);
+        lover.transform.position = loverPos.position;
         SetPlayer();
         NextFight();
     }
@@ -86,6 +92,11 @@ public class GameManagerScript : MonoBehaviour
             enemy.SetupAnimation();
         }
         lover.ChooseAttack();
+
+        player.set_target(enemies[0]);
+        lover.set_target(enemies[0]);
+
+
         ChoiceMenu();
     }
 
@@ -103,8 +114,20 @@ public class GameManagerScript : MonoBehaviour
     }
     public void StrBar(float barPos)
     {
-        if (barPos > minPerfectHit) barPos = 1;
-        else if (barPos < minSuccessfulHit) barPos = 0;
+        if (barPos < maxPerfectHit)
+        {
+            barPos = 1;
+            lover.CheckTriggers(AffectionTrigger.Trigger.perfect);
+            if (choseAttack) lover.CheckTriggers(AffectionTrigger.Trigger.perfect_att);
+            else lover.CheckTriggers(AffectionTrigger.Trigger.perfect_def);
+        }
+        else if (barPos > maxSuccessfulHit)
+        {
+            barPos = 0;
+            lover.CheckTriggers(AffectionTrigger.Trigger.miss);
+            if (choseAttack) lover.CheckTriggers(AffectionTrigger.Trigger.miss_hit);
+            else lover.CheckTriggers(AffectionTrigger.Trigger.miss_def);
+        }
         barScore = barPos;
         actionMode = true;
         CollectActions();
@@ -113,35 +136,23 @@ public class GameManagerScript : MonoBehaviour
     public void CollectActions()
     {
         if (choseAttack)
-            turnActions.Add(new turnAction(turnAction.ActionType.playerAttack, player, "player_attack", 0, barScore));
+            turnActions.Add(new turnAction(turnAction.ActionType.playerAttack, player, "attack", 0, barScore));
         else
-            turnActions.Add(new turnAction(turnAction.ActionType.playerDeffend, player, "player_attack", 0, barScore));
+            turnActions.Add(new turnAction(turnAction.ActionType.playerDeffend, player, "attack", 0, barScore));
 
         for(int i = 1; i < allCharacters.Length;i++)
         {
-            turnActions.Add(new turnAction(turnAction.ActionType.attack, allCharacters[i], "player_attack"));
+            turnActions.Add(new turnAction(turnAction.ActionType.attack, allCharacters[i], "attack"));
         }
 
         for(int i = 0; i < allCharacters.Length; i++)
         {
             if (allCharacters[i].isPoisoned)
-                turnActions.Add(new turnAction(turnAction.ActionType.takePoisonDamage, allCharacters[i], "player_attack"));
+                turnActions.Add(new turnAction(turnAction.ActionType.takePoisonDamage, allCharacters[i], "attack"));
         }
 
         actionMode = true;
         PlayActions();
-    }
-
-    public void EffectsActions()
-    {
-        actionIndex++;
-        if (actionIndex >= allCharacters.Length)
-        {
-            actionIndex = -1;
-            DisposeDead();
-        }
-        else if (allCharacters[actionIndex].isPoisoned) allCharacters[actionIndex].poisonTick();
-        else EffectsActions();
     }
 
     public void PlayActions()
@@ -151,7 +162,10 @@ public class GameManagerScript : MonoBehaviour
             turnAction action = turnActions[0];
             turnActions.RemoveAt(0);
             action.CallAction();
-            
+            if (action.actionType == turnAction.ActionType.die && enemies.Length > 1)
+            {
+                lover.set_target(enemies[1]);
+            }
         }
         else
         {
@@ -163,10 +177,12 @@ public class GameManagerScript : MonoBehaviour
     {
         if (enemies[0].isDead)
         {
+            Destroy(enemies[0]);
             if (enemies.Length > 1)
             {
                 if (enemies[1].isDead)
                 {
+                    Destroy(enemies[1]);
                     NextFight();
                     return;
                 }
@@ -177,17 +193,31 @@ public class GameManagerScript : MonoBehaviour
             }
             else
             {
-                if (enemies[1].isDead)
-                {
-                    enemies = new EnemyScript[] { enemies[0] };
-                }
+                NextFight();
+                return;
             }
+        }
+        else if (enemies.Length > 1)
+        {
+            if (enemies[1].isDead)
+            { 
+                Destroy(enemies[1]);
+                enemies = new EnemyScript[] { enemies[0] };
+            }
+        }
+        allCharacters = new CharacterScript[enemies.Length + 2];
+        allCharacters[0] = player;
+        allCharacters[1] = lover;
+        for(int i = 2; i< enemies.Length + 2;i++)
+        {
+            allCharacters[i] = enemies[i - 2];
         }
         Setup();
     }
 
     private void Win()
     {
+        actionMode = false;
         Debug.Log("WIN!");
     }
 

@@ -12,10 +12,17 @@ public class PlayerScript : CharacterScript
 
     public void PlayerAttack(float success)
     {
-        int dmg = (int)(maxAtt * success);
+        int dmg = (int)(maxAtt * success) + buffAmount;
         gm.turnActions.Insert(0,
-            new turnAction(turnAction.ActionType.takeDamage, target, "player_attack",
-            dmg + buffAmount));
+            new turnAction(turnAction.ActionType.takeDamage, target, "attack",
+            dmg));
+        if (gm.lover.lastDamage > -1)
+        {
+            if (dmg > gm.lover.lastDamage)
+                gm.lover.CheckTriggers(AffectionTrigger.Trigger.attack_for_more);
+            else if (dmg < gm.lover.lastDamage)
+                gm.lover.CheckTriggers(AffectionTrigger.Trigger.attack_for_less);
+        }
         buffAmount = 0;
     }
     public void PlayerDefend(float success)
@@ -26,6 +33,7 @@ public class PlayerScript : CharacterScript
     public override void getHit(int dmg)
     {
         dmg -= def_points;
+        if (dmg > 0) gm.lover.CheckTriggers(AffectionTrigger.Trigger.get_hit);
         def_points = 0;
         base.getHit(dmg);
     }

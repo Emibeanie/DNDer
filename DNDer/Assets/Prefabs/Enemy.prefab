@@ -139,7 +139,7 @@ MonoBehaviour:
   isPoisoned: 0
   poisonCount: 0
   isDead: 0
-  maxHP: 100
+  maxHP: 3
   currentHP: 0
 --- !u!95 &5374397239261151981
 Animator:
