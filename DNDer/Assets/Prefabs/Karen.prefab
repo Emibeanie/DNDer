@@ -219,8 +219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
   anim: {fileID: 8721415040485092119}
+  dmgNumbers: {fileID: 0}
   attacks:
-  - {fileID: 6712455499430592583, guid: 11cfbb64d401eea4c88e1effe76996ae, type: 3}
   - {fileID: 6712455499430592583, guid: 11cfbb64d401eea4c88e1effe76996ae, type: 3}
   isPoisoned: 0
   poisonCount: 0

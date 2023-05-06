@@ -10,9 +10,9 @@ public class KarenSpecialAttack : AttackScript
         GameManagerScript gm = GameObject.FindAnyObjectByType<GameManagerScript>();
         foreach (EnemyScript enemy in gm.enemies)
         {
-            gm.turnActions.Insert(0, new turnAction(turnAction.ActionType.getBuff, enemy, "hit", buffAmount));
+            gm.turnActions.Insert(0, new turnAction(turnAction.ActionType.getBuff, enemy, "buff", buffAmount));
         }
-        gm.turnActions.Insert(0, new turnAction(turnAction.ActionType.getBuff, gm.player, "hit", buffAmount * 2));
+        gm.turnActions.Insert(0, new turnAction(turnAction.ActionType.getBuff, gm.player, "buff", buffAmount * 2));
 
         base.effect(target);
     }

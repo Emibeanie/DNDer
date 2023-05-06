@@ -141,7 +141,7 @@ public class GameManagerScript : MonoBehaviour
         if (choseAttack)
             turnActions.Add(new turnAction(turnAction.ActionType.playerAttack, player, "attack", 0, barScore));
         else
-            turnActions.Add(new turnAction(turnAction.ActionType.playerDeffend, player, "attack", 0, barScore));
+            turnActions.Add(new turnAction(turnAction.ActionType.playerDeffend, player, "defend", 0, barScore));
 
         for(int i = 1; i < allCharacters.Length;i++)
         {
