@@ -7,6 +7,7 @@ using System.Net;
 using UnityEditor.Experimental.GraphView;
 using Unity.VisualScripting;
 using Mono.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -141,7 +142,7 @@ public class GameManagerScript : MonoBehaviour
         if (choseAttack)
             turnActions.Add(new turnAction(turnAction.ActionType.playerAttack, player, "attack", 0, barScore));
         else
-            turnActions.Add(new turnAction(turnAction.ActionType.playerDeffend, player, "attack", 0, barScore));
+            turnActions.Add(new turnAction(turnAction.ActionType.playerDeffend, player, "defend", 0, barScore));
 
         for(int i = 1; i < allCharacters.Length;i++)
         {
@@ -223,6 +224,14 @@ public class GameManagerScript : MonoBehaviour
     {
         actionMode = false;
         Debug.Log("WIN!");
+        if(lover.affection < 6)
+        {
+            SceneManager.LoadScene("Dinder");
+        }
+        else
+        {
+            SceneManager.LoadScene("Ending");
+        }
     }
 
     public bool isAttacking()
