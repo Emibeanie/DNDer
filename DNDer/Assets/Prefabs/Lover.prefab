@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
   anim: {fileID: 7498420113715384763}
+  dmgText: {fileID: 4802681085948546139, guid: c3f0265bf499f62489bed1dcdf0ab11c, type: 3}
   attacks: []
   isPoisoned: 0
   poisonCount: 0
