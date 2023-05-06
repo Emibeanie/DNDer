@@ -21,7 +21,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] float maxPerfectHit;
     [SerializeField] float maxSuccessfulHit;
 
-    EnemyScript[] enemies;
+    public EnemyScript[] enemies;
     CharacterScript[] allCharacters;
 
     public LoverScript loverPrefab;
@@ -76,6 +76,7 @@ public class GameManagerScript : MonoBehaviour
         }
         player.set_target(enemies[0]);
         lover.set_target(enemies[0]);
+        enemies[0].GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
         BeginFight();
     }
     private void BeginFight()
@@ -142,7 +143,8 @@ public class GameManagerScript : MonoBehaviour
 
         for(int i = 1; i < allCharacters.Length;i++)
         {
-            turnActions.Add(new turnAction(turnAction.ActionType.attack, allCharacters[i], "attack"));
+            turnActions.Add(new turnAction(turnAction.ActionType.attack, allCharacters[i], 
+                allCharacters[i].attacks[allCharacters[i].currentAttack].animationTrigger));
         }
 
         for(int i = 0; i < allCharacters.Length; i++)

@@ -17,7 +17,7 @@ public class CharacterScript : MonoBehaviour
         isPoisoned = true;
     }
 
-    protected int currentAttack = -1;
+    public int currentAttack = -1;
     protected CharacterScript target;
     public bool isDead = false;
     protected int buffAmount = 0;
@@ -56,7 +56,7 @@ public class CharacterScript : MonoBehaviour
     public virtual void attack()
     {
         gm.turnActions.Insert(0,
-            new turnAction(turnAction.ActionType.takeDamage, target, "attack", 
+            new turnAction(turnAction.ActionType.takeDamage, target, "hit", 
             attacks[currentAttack].dmg + buffAmount));
         attacks[currentAttack].effect(target);
         buffAmount = 0;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : CharacterScript
 {
@@ -14,7 +15,7 @@ public class PlayerScript : CharacterScript
     {
         int dmg = (int)(maxAtt * success) + buffAmount;
         gm.turnActions.Insert(0,
-            new turnAction(turnAction.ActionType.takeDamage, target, "attack",
+            new turnAction(turnAction.ActionType.takeDamage, target, "hit",
             dmg));
         if (gm.lover.lastDamage > -1)
         {
@@ -36,5 +37,10 @@ public class PlayerScript : CharacterScript
         if (dmg > 0) gm.lover.CheckTriggers(AffectionTrigger.Trigger.get_hit);
         def_points = 0;
         base.getHit(dmg);
+    }
+
+    public override void Die()
+    {
+        SceneManager.LoadScene("Dinder");
     }
 }
