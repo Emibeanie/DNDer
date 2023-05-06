@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2434604883362106867}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.28, y: 0.28, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3157898443292717110}
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 0}
   anim: {fileID: 5374397239261151981}
-  dmgText: {fileID: 4802681085948546139, guid: c3f0265bf499f62489bed1dcdf0ab11c, type: 3}
+  dmgNumbers: {fileID: 4802681085948546139, guid: c3f0265bf499f62489bed1dcdf0ab11c, type: 3}
   attacks:
   - {fileID: 6712455499430592583, guid: 11cfbb64d401eea4c88e1effe76996ae, type: 3}
   - {fileID: 5471268724030818771, guid: 1f40592eb888363479b385bb38ff8b3d, type: 3}

@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CharacterScript : MonoBehaviour
 {
     [SerializeField] protected GameManagerScript gm;
     [SerializeField] public Animator anim;
+    [SerializeField] DamagePopupScript dmgNumbers;
 
     public List<AttackScript> attacks;
     public bool isPoisoned = false;
@@ -29,6 +31,7 @@ public class CharacterScript : MonoBehaviour
     {
         currentHP = maxHP;
         gm = GameObject.Find("Game Manager").GetComponent<GameManagerScript>();
+        dmgNumbers = GameObject.Find("Damage Popup Text").GetComponent<DamagePopupScript>();
     }
 
     public void GetBuff(int buffAmount)
@@ -67,6 +70,9 @@ public class CharacterScript : MonoBehaviour
         currentHP -= dmg;
         if (currentHP <= 0)
             gm.turnActions.Insert(0,new turnAction(turnAction.ActionType.die, this, "died"));
+        Debug.Log("dmgNumbers type: " + dmgNumbers.GetType().ToString()); 
+        //DamagePopupScript damagePopup = Instantiate(dmgNumbers);
+        dmgNumbers.ShowDamageText(dmg, transform.position);
     }
 
     public void Heal(int healAmount)

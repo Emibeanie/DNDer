@@ -30,7 +30,7 @@ public class DamageNumbersScript : MonoBehaviour
     {
         timer += Time.deltaTime;
         float fraction = lifeTime / 2;
-        if (timer > lifeTime) Destroy(txt);
+        if (timer > lifeTime) Destroy(gameObject);
         else if (timer > fraction)
         {
             txt.color = Color.Lerp(txt.color, Color.clear, (timer - fraction) / (lifeTime - fraction));
