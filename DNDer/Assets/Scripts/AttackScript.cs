@@ -6,6 +6,7 @@ public class AttackScript : MonoBehaviour
 {
     public bool onPlayer = true;
     public int dmg = 0;
+    public string animationTrigger = "attack";
 
     public virtual void effect(CharacterScript target)
     {
