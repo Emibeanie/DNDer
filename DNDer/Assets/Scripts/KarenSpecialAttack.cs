@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KarenSpecialAttack : AttackScript
@@ -15,13 +13,10 @@ public class KarenSpecialAttack : AttackScript
         {
             gm.turnActions.Insert(0, new turnAction(turnAction.ActionType.getBuff, enemy, "buff", buffAmount));
         }
-<<<<<<< HEAD
-        gm.turnActions.Insert(0, new turnAction(turnAction.ActionType.getBuff, gm.player, "hit", buffAmount * 2));
         
-=======
         gm.turnActions.Insert(0, new turnAction(turnAction.ActionType.getBuff, gm.player, "buff", buffAmount * 2));
 
->>>>>>> fb0817323431dcad7808e1afed69a400d78dedd5
+
         base.effect(target);
     }
 }

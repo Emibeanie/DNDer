@@ -1,12 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Net;
-using UnityEditor.Experimental.GraphView;
-using Unity.VisualScripting;
-using Mono.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
